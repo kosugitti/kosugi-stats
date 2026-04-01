@@ -1,0 +1,43 @@
+---
+title: "心理学データ解析基礎"
+---
+
+1年次必修科目「心理学データ解析基礎」の教材です。
+
+## シラバス
+
+- [心理学データ解析基礎 シラバス](pdfs/syllabus_basic.pdf) **2025年度 Ver3**{.version-info}
+
+## テキスト
+
+パソコンやタブレットでご覧いただくことをお勧めします。
+
+- [心理学データ解析基礎 授業資料 Ver3](pdfs/BasicBook3.pdf) **2025年度版**{.version-info}
+- [心理学データ解析基礎 授業資料（旧版）](archive/Dkiso1_book.pdf) 2024年度までのバージョン{.version-info}
+
+## Kindle Direct Publishing
+
+教材を全て印刷するのは手間がかかると思われる方のために、Amazonでペーパーバック版を提供しています。
+
+- [心理学データ解析基礎: R と JASP で学ぶ楽しい心理統計の世界](https://amzn.to/3tuDKn0)
+
+## サンプルデータ
+
+- [野球選手のデータ 10年度分](codes/SampleData/BaseballDecade.csv)
+- [家賃のデータ](codes/SampleData/yachin.csv)
+- [項目反応理論用のデータ](codes/SampleData/IRTsample.csv)
+- [体重推移のデータ](codes/SampleData/Weight.csv)
+- [M-1グランプリの評定データ](codes/SampleData/M1score2023.csv)
+
+## Rコード
+
+- [二群の平均値差](codes/Dkiso1/20_example.R)
+- [Rによる分散分析のコード](codes/Dkiso1/Chapter22ANOVA.R)
+- [Rによる分散分析のコード（Rmdファイルバージョン）](codes/Dkiso1/Chapter22ANOVA.Rmd)
+- [分散分析課題用データセット1](codes/SampleData/chapter22exe1.csv)
+- [分散分析課題用データセット2](codes/SampleData/chapter22exe2.csv)
+- [分散分析課題用データセット3](codes/SampleData/chapter22exe3.csv)
+
+## 付録
+
+- [電子計算機えとせとら](pdfs/common_contents.pdf) --- パソコンのファイル概念、キーボード配列など、テキストの付録に含まれる内容のまとめ

@@ -1,0 +1,12 @@
+/* PDF link indicator */
+a[href$=".pdf"]::after {
+  content: " [PDF]";
+  font-size: 0.8em;
+  color: #888;
+}
+
+/* Version info */
+.version-info {
+  font-size: 0.9em;
+  color: #666;
+}

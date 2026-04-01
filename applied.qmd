@@ -1,0 +1,47 @@
+---
+title: "心理学データ解析応用"
+---
+
+2年次選択科目「心理学データ解析応用」の教材です。前期（応用1）と後期（応用2）に分かれています。
+
+## シラバス
+
+- [心理学データ解析応用1（前期）](pdfs/syllabus2a.pdf)
+- [心理学データ解析応用2（後期）](pdfs/syllabus2b.pdf)
+
+## テキスト
+
+- [心理学データ解析応用1 授業資料](pdfs/Dkiso2_book1.pdf)
+- [心理学データ解析応用2 授業資料](pdfs/Dkiso2_book2.pdf)
+- [数値シミュレーションで読み解く統計の仕組み（Amazon）](https://amzn.to/4b4GMlA) --- 応用2の市販テキスト
+
+## Rコード（応用2）
+
+### 事前準備
+
+- [Rstanの確認用コード](codes/Dkiso2/00_Appendix1_rstan.R)
+- [cmdstanrの確認用コード](codes/Dkiso2/00_Appendix1_cmdstanr.R)
+
+### 各回のコード
+
+| 回 | テーマ | rstan | cmdstan |
+|----|--------|-------|---------|
+| 01 | プログラミングの基礎 | [01](codes/Dkiso2/01_BasicProgramming.R) | |
+| 02 | 確率変数 | [02](codes/Dkiso2/02_RandomVariables.R) | |
+| 03 | Stanの基礎 | [rstan](codes/Dkiso2/03_exampleRstan.R) | [cmdstan](codes/Dkiso2/03_exampleCmdstan.R) |
+| 04 | 平均値の差の検定 | [rstan](codes/Dkiso2/04_exampleRstan.R) | [cmdstan](codes/Dkiso2/04_exampleCmdstan.R) |
+| 05 | 生成量を使って | [rstan](codes/Dkiso2/05_exampleRstan.R) | [cmdstan](codes/Dkiso2/05_exampleCmdstan.R) |
+| 06 | 多群の平均値の比較 | [rstan](codes/Dkiso2/06_AnovaExampleRstan.R) | [cmdstan](codes/Dkiso2/06_AnovaExampleCmdstan.R) |
+| 07 | Withinモデル | [rstan](codes/Dkiso2/07_WithinExampleRstan.R) | [cmdstan](codes/Dkiso2/07_WithinExampleCmdstan.R) |
+| 08 | カテゴリカルモデル | [rstan](codes/Dkiso2/08_categoricalRstan.R) | [cmdstan](codes/Dkiso2/08_categoricalCmdstan.R) |
+| 09 | 一般化線形モデル | [rstan](codes/Dkiso2/09_GLM_Rstan.R) | [cmdstan](codes/Dkiso2/09_GLM_Cmdstan.R) |
+| 10 | 階層線形モデル | [rstan](codes/Dkiso2/10_GLMM_Rstan.R) | [cmdstan](codes/Dkiso2/10_GLMM_Cmdstan.R) |
+| 11 | 混合分布モデル | [rstan](codes/Dkiso2/11_Mixture_Rstan.R) | [cmdstan](codes/Dkiso2/11_Mixture_Cmdstan.R) |
+| 12 | IRTモデル | [rstan](codes/Dkiso2/12_IRT_Rstan.R) | [cmdstan](codes/Dkiso2/12_IRT_Cmdstan.R) |
+| 13 | 変化点検出 | [rstan](codes/Dkiso2/13_changePoint_Rstan.R) | [cmdstan](codes/Dkiso2/13_changePoint_Cmdstan.R) |
+| 14 | 状態空間モデル | [rstan](codes/Dkiso2/14_stateSpace_Rstan.R) | [cmdstan](codes/Dkiso2/14_stateSpace_Cmdstan.R) |
+
+## 旧版アーカイブ
+
+- [心理学データ解析応用 旧バージョン授業資料](archive/Dkiso2_book_ver1.pdf)
+- [心理学データ解析応用（旧版KDP）](https://amzn.to/3L8aecK)

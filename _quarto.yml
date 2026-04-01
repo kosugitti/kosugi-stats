@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - "pdfs/**"
+    - "archive/**"
+    - "codes/**"
+
+website:
+  title: "心理統計教育教材"
+  site-url: "https://kosugitti.github.io/kosugi-stats/"
+  navbar:
+    left:
+      - href: index.qmd
+        text: ホーム
+      - href: basic.qmd
+        text: データ解析基礎
+      - href: applied.qmd
+        text: データ解析応用
+      - href: lectures.qmd
+        text: 特別講義
+      - href: codes.qmd
+        text: コードとデータ
+      - text: 関連サイト
+        menu:
+          - text: 心理学統計実習（Webテキスト）
+            href: https://kosugitti.github.io/PsyStatsPracticals/
+          - text: 小杉ゼミ（Rドリル）
+            href: https://kosugitti.github.io/kosugi-labo/r-tutorial/index.html
+    right:
+      - icon: github
+        href: https://github.com/kosugitti/kosugi-stats
+  page-footer:
+    center: |
+      © Koji Kosugi |
+      <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/">CC BY-ND 4.0</a>
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    lang: ja

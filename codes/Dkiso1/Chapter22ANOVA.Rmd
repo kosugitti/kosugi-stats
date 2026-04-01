@@ -1,0 +1,126 @@
+---
+title: "Chapter 22伴走Rmdファイル"
+author: "小杉考司"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# このファイルは，第22章の分析を行うRmdファイルです。
+```
+
+
+## 分散分析用の関数を読み込もう
+
+```{r}
+source("https://riseki.cloudfree.jp/?plugin=attach&refer=ANOVA%E5%90%9B&openfile=anovakun_489.txt")
+
+```
+
+# Betweenデザインの分析
+
+## データフレームを組み上げる
+```{r}
+Example1 <- data.frame(
+  id = rep(1:4, 3),
+  condition = rep(1:3, each = 4),
+  value = c(6, 6, 5, 5, 7, 4, 7, 6, 4, 3, 4, 6)
+)
+```
+
+
+## Factor型にする
+```{r}
+Example1$condition <- factor(Example1$condition,
+  labels = c("control", "exp1", "exp2")
+)
+```
+
+データの中身を確認しておきましょう。
+```{r}
+Example1
+```
+
+## 線形モデルとして分析する
+```{r}
+result.lm1 <- lm(value ~ condition, data = Example1)
+summary(result.lm1)
+```
+
+### 図を見ると明らかです。
+```{r}
+library(ggplot2)
+ggplot(Example1) +
+  aes(x = condition, y = value, fill = condition) +
+  stat_summary(geom = "bar", fun = "mean")
+```
+
+### デフォルトの関数でもこういう結果が出せますよ
+```{r}
+anova(result.lm1)
+```
+
+### Anovakunは親切設計
+```{r}
+anovakun(Example1[, 2:3], "As", 3, eps = T)
+```
+
+
+# 二要因デザイン(Between)の場合
+
+## データの準備
+
+ファクター型にして出力するところまでです。
+```{r}
+Example2 <- data.frame(
+  id = 1:12,
+  num = rep(1:3, 4),
+  temp = rep(1:2, each = 6),
+  maker = rep(rep(1:2, each = 3), 2),
+  value = c(13, 11, 12, 7, 6, 8, 9, 9, 9, 13, 11, 9)
+)
+Example2$temp <- factor(Example2$temp,
+  labels = c("Hot", "Cold")
+)
+Example2$maker <- factor(Example2$maker,
+  label = c("A", "B")
+)
+
+Example2
+```
+
+## 線形モデルとしての出力
+```{r}
+result.lm2 <- lm(value ~ temp * maker, data = Example2)
+summary(result.lm2)
+```
+
+## デフォルトの関数での出力
+```{r}
+anova(result.lm2)
+```
+
+## Anovakunでの出力
+```{r}
+anovakun(Example2[, 3:5], "ABs", 2, 2, eps = T)
+```
+
+# Withinデザインの場合
+
+データを作ります。できたものを確認しておきましょう。
+```{r}
+Example3 <- data.frame(
+  ID = 1:4,
+  Time1 = c(10, 9, 4, 7),
+  Time2 = c(5, 4, 2, 3),
+  Time3 = c(9, 5, 3, 5)
+)
+
+Example3
+```
+
+## Anovakunで分析
+結果の読み取り方が複雑ですから，授業をよく聞いておいてね。
+
+```{r}
+anovakun(Example3[, 2:4], "sA", 3, eps = T)
+```

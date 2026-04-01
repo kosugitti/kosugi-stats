@@ -1,0 +1,29 @@
+---
+title: "コードとデータ"
+---
+
+授業で用いるサンプルデータやRのコードです。
+
+## サンプルデータ
+
+| ファイル | 内容 |
+|----------|------|
+| [BaseballDecade.csv](codes/SampleData/BaseballDecade.csv) | 野球選手のデータ 10年度分 |
+| [yachin.csv](codes/SampleData/yachin.csv) | 家賃のデータ |
+| [IRTsample.csv](codes/SampleData/IRTsample.csv) | 項目反応理論用のデータ |
+| [Weight.csv](codes/SampleData/Weight.csv) | 体重推移のデータ |
+| [M1score2023.csv](codes/SampleData/M1score2023.csv) | M-1グランプリの評定データ |
+| [chapter22exe1.csv](codes/SampleData/chapter22exe1.csv) | 分散分析課題用データセット1 |
+| [chapter22exe2.csv](codes/SampleData/chapter22exe2.csv) | 分散分析課題用データセット2 |
+| [chapter22exe3.csv](codes/SampleData/chapter22exe3.csv) | 分散分析課題用データセット3 |
+
+## データ解析基礎 Rコード
+
+- [二群の平均値差](codes/Dkiso1/20_example.R)
+- [Rによる分散分析のコード](codes/Dkiso1/Chapter22ANOVA.R)
+- [Rによる分散分析のコード（Rmd版）](codes/Dkiso1/Chapter22ANOVA.Rmd)
+
+## データ解析応用 Rコード
+
+各回のコードはrstan版とcmdstan版の2種類を用意しています。
+詳細は[データ解析応用](applied.qmd)ページを参照してください。

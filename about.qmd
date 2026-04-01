@@ -1,0 +1,20 @@
+---
+title: "このサイトについて"
+---
+
+## 著者
+
+[小杉考司（Koji Kosugi）](https://researchmap.jp/kosugitti)
+
+## ライセンス
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-nd/4.0/88x31.png" /></a>
+
+この作品は [クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際 ライセンス](http://creativecommons.org/licenses/by-nd/4.0/) の下に提供されています。
+
+## 連絡先
+
+- コンテンツの修正等: [GitHub Issue](https://github.com/kosugitti/kosugi-stats/issues)
+- 相談・議論: [GitHub Discussions](https://github.com/kosugitti/kosugi-stats/discussions)
+- メール: kosugitti _at_ gmail.com
+- 授業に関する連絡: classkosugitti _at_ gmail.com
