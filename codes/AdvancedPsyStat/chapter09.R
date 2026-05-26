@@ -238,6 +238,12 @@ model3 <- brm(
 
 print(summary(model3))
 
+# rho（切片と傾きの相関）の抽出
+rho3 <- as.vector(as_draws_df(model3)[["cor_class_id__Intercept__study_time_c"]])
+rho3_hdi <- hdi(rho3, ci = 0.95)
+cat(sprintf("\nrho: EAP=%.3f  MAP=%.3f  HDI=[%.2f, %.2f]\n",
+  mean(rho3), as.numeric(map_estimate(rho3)), rho3_hdi$CI_low, rho3_hdi$CI_high))
+
 # 図9.4: 変動切片・変動傾きモデルの可視化 ---------------------------------
 
 fixef_model3 <- fixef(model3)
