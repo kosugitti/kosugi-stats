@@ -27,6 +27,8 @@ website:
             href: https://kosugitti.github.io/PsyStatsPracticals/
           - text: 小杉ゼミ（Rドリル）
             href: https://kosugitti.github.io/kosugi-labo/r-tutorial/index.html
+          - text: 小杉ポータル
+            href: https://kosugitti.github.io/
     right:
       - icon: github
         href: https://github.com/kosugitti/kosugi-stats
