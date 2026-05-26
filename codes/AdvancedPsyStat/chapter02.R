@@ -67,5 +67,3 @@ p_95 <- ggplot(df_normal, aes(x = x, y = y)) +
     panel.grid.minor = element_blank()
   )
 print(p_95)
-
-cat("参考: 正規分布の95%区間（灰色部分がカバーする範囲）を表示しました\n")

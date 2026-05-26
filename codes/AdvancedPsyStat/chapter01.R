@@ -185,5 +185,3 @@ p_main <- ggplot() +
   coord_fixed(xlim = c(-3.5, 4.2), ylim = c(-4, 3.5)) +
   theme_void()
 print(p_main)
-
-cat("\n--- ポリコリック相関の概念図（参考）を表示しました ---\n")
