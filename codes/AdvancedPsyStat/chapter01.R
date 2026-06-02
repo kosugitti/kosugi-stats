@@ -97,38 +97,46 @@ p3 <- data.frame(val = c(penguins$bill_length_mm, 69, 25)) %>%
   theme_classic()
 print(p3)
 
-# 図1.5: レインプロット -------------------------------------------------------
+# 図1.5: レインクラウドプロット ----------------------------------------------
 penguins_adelie <- penguins %>%
   filter(species == "Adelie") %>%
   drop_na(bill_depth_mm)
 
-# 図1.5: くちばしの深さのレインプロット（Adelie種）
-p2 <- ggplot(
-  penguins_adelie,
-  aes(x = bill_depth_mm, y = 0)
-) +
-  stat_halfeye(
-    width = 0.6,
-    justification = -0.5,
-    alpha = 0.6,
+# 図1.5: くちばしの深さのレインクラウドプロット(Adelie種)
+# ggdist の stat_halfeye / stat_dots を組み合わせて構成。
+# coord_flip() 後の見た目: 雲(半バイオリン)が上，箱ひげが中央，
+# ビン化された整然ドットプロット(雨)が下。
+p2 <- ggplot(penguins_adelie, aes(x = 1, y = bill_depth_mm)) +
+  ggdist::stat_halfeye(
+    adjust = 0.5,
+    justification = -0.2,
     .width = 0,
-    point_colour = NA
+    point_colour = NA,
+    fill = "gray70",
+    colour = "black",
+    alpha = 0.8
   ) +
   geom_boxplot(
-    width = 0.52,
-    alpha = 0.8,
-    outlier.shape = NA
+    width = 0.12,
+    outlier.shape = NA,
+    fill = "white",
+    colour = "black"
   ) +
-  geom_point(
-    position = position_jitter(width = 0, height = 0.1),
-    size = 2,
-    alpha = 0.7,
-    color = "black"
+  ggdist::stat_dots(
+    side = "left",
+    justification = 1.1,
+    dotsize = 0.7,
+    colour = "black",
+    fill = "black"
   ) +
+  coord_flip() +
+  labs(x = NULL, y = "くちばしの深さ (mm)") +
   theme_classic() +
-  xlab("くちばしの深さ (mm)") +
-  ylab("") +
-  theme(aspect.ratio = 1 / 3)
+  theme(
+    axis.text.y  = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.line.y  = element_blank()
+  )
 print(p2)
 
 # 図1.6: 散布図 -------------------------------------------------------------
