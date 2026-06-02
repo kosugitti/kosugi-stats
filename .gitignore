@@ -6,3 +6,6 @@
 /.quarto/
 
 **/*.quarto_ipynb
+
+# chapter*.R 実行時の副産物(都度生成されるため追跡不要)
+codes/AdvancedPsyStat/source/
