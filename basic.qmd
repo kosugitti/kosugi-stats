@@ -21,6 +21,13 @@ title: "心理学データ解析基礎"
 
 - [心理学データ解析基礎: R と JASP で学ぶ楽しい心理統計の世界](https://amzn.to/3tuDKn0)
 
+## インタラクティブ教材
+
+ブラウザ上で動かしながら推定・検定の考え方を体感できるデモアプリです。
+
+- [母平均の区間推定](https://sv1.psy.senshu-u.ac.jp/kosugi-demo/mean-ci/) --- 母集団から標本をとって母平均を区間推定する様子を可視化します（点推定・区間推定・不偏分散・標準誤差・信頼区間・t分布）
+- [教材用デモアプリ集（一覧とコード）](https://kosugitti.github.io/stat-demo-apps/)
+
 ## サンプルデータ
 
 - [野球選手のデータ 10年度分](codes/SampleData/BaseballDecade.csv)
