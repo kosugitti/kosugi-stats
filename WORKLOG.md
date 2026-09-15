@@ -1,5 +1,39 @@
 # WORKLOG
 
+## 2026-08-01
+
+### stats.kosugitti.net のHTTPS証明書エラーを解消
+
+**症状**: ブラウザで `http://stats.kosugitti.net/` を開くと「安全なサイトではない」警告。ChromeのHTTPS-Firstが自動で `https://` を試し，`NET::ERR_CERT_COMMON_NAME_INVALID` になっていた。
+
+**原因**: GitHub Pages側でこのドメイン用のLet's Encrypt証明書が未発行だった。サーバが返す証明書がGitHubの汎用証明書 `CN=*.github.io`（SANは `*.github.io` 等のみ）で，ホスト名が一致しなかった。
+
+- DNS側は正常（`stats.kosugitti.net` → CNAME → `kosugitti.github.io` → 185.199.108-111.153）
+- `kosugitti.net` のCAAも `letsencrypt.org` を許可済みでブロック要因なし
+- `CNAME` ファイル（ルート・docs/ 両方）も `stats.kosugitti.net` で正しい
+- API上は `cname` は設定済みだが `https_enforced=false`，`https_certificate` フィールド自体が存在しない＝証明書がまったく作られていない状態だった
+
+**対処**: カスタムドメインを解除→再設定して証明書発行を再トリガした。
+
+```bash
+gh api -X PUT repos/kosugitti/kosugi-stats/pages -f cname=              # 解除
+gh api -X PUT repos/kosugitti/kosugi-stats/pages -f cname=stats.kosugitti.net  # 再設定
+# 証明書 NONE → authorization_pending → approved（約20分）
+gh api -X PUT repos/kosugitti/kosugi-stats/pages -F https_enforced=true
+```
+
+**結果**: `subject=CN=stats.kosugitti.net` / issuer=Let's Encrypt YR1 / 有効期限 2026-10-30 の正しい証明書に置き換わり，HTTPS 200で疎通。`https_enforced=true`。
+
+- ドメイン再設定の直後にPagesビルドが1回 `errored` になったが，直後の再ビルドが `built` で完了。一過性でサイト内容に影響なし
+- 実行時点では `http://` からの301リダイレクトが未反映（Fastlyのエッジキャッシュ切れ待ち・設定自体は入っている）
+
+### 他サイトの横断点検（同じ問題がないか確認）
+
+- GitHub Pages有効リポジトリ21件を全チェック。カスタムドメイン使用は2件のみで，`kosugi-labo`（labo.kosugitti.net）は cert=approved・https_enforced=true で元から正常。残り19件は `*.github.io` 既定ドメインのため問題なし
+- Pages以外も実接続で検査し全て正常: `kosugitti.net`，`www.kosugitti.net`，`www.psy.senshu-u.ac.jp`，`www3`，`ext`，`gico`，`kujira`，`sv1`，`sv2`
+
+**引き継ぎ**: `wundt.psy.senshu-u.ac.jp` は接続タイムアウトで応答なし（証明書ではなく到達性の問題。学外から不可か停止中）。今回は未着手なので気になるなら別途調査。
+
 ## 2026-04-01（続き）
 - CNAME追加（stats.kosugitti.net）
 - CLAUDE.md にユーザ操作サポート手順を追記

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,16 +12,54 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -39,10 +77,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -156,8 +194,14 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#worklog" id="toc-worklog" class="nav-link active" data-scroll-target="#worklog">WORKLOG</a>
   <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">2026-08-01</a>
+  <ul class="collapse">
+  <li><a href="#stats.kosugitti.net-のhttps証明書エラーを解消" id="toc-stats.kosugitti.net-のhttps証明書エラーを解消" class="nav-link" data-scroll-target="#stats.kosugitti.net-のhttps証明書エラーを解消">stats.kosugitti.net のHTTPS証明書エラーを解消</a></li>
+  <li><a href="#他サイトの横断点検同じ問題がないか確認" id="toc-他サイトの横断点検同じ問題がないか確認" class="nav-link" data-scroll-target="#他サイトの横断点検同じ問題がないか確認">他サイトの横断点検（同じ問題がないか確認）</a></li>
+  </ul></li>
   <li><a href="#続き" id="toc-続き" class="nav-link" data-scroll-target="#続き">2026-04-01（続き）</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">2026-04-01</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">2026-04-01</a></li>
+  <li><a href="#claude.mdからの退避-2026-07-17" id="toc-claude.mdからの退避-2026-07-17" class="nav-link" data-scroll-target="#claude.mdからの退避-2026-07-17">CLAUDE.mdからの退避 (2026-07-17)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -170,6 +214,38 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="worklog" class="level1">
 <h1>WORKLOG</h1>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">2026-08-01</h2>
+<section id="stats.kosugitti.net-のhttps証明書エラーを解消" class="level3">
+<h3 class="anchored" data-anchor-id="stats.kosugitti.net-のhttps証明書エラーを解消">stats.kosugitti.net のHTTPS証明書エラーを解消</h3>
+<p><strong>症状</strong>: ブラウザで <code>http://stats.kosugitti.net/</code> を開くと「安全なサイトではない」警告。ChromeのHTTPS-Firstが自動で <code>https://</code> を試し，<code>NET::ERR_CERT_COMMON_NAME_INVALID</code> になっていた。</p>
+<p><strong>原因</strong>: GitHub Pages側でこのドメイン用のLet’s Encrypt証明書が未発行だった。サーバが返す証明書がGitHubの汎用証明書 <code>CN=*.github.io</code>（SANは <code>*.github.io</code> 等のみ）で，ホスト名が一致しなかった。</p>
+<ul>
+<li>DNS側は正常（<code>stats.kosugitti.net</code> → CNAME → <code>kosugitti.github.io</code> → 185.199.108-111.153）</li>
+<li><code>kosugitti.net</code> のCAAも <code>letsencrypt.org</code> を許可済みでブロック要因なし</li>
+<li><code>CNAME</code> ファイル（ルート・docs/ 両方）も <code>stats.kosugitti.net</code> で正しい</li>
+<li>API上は <code>cname</code> は設定済みだが <code>https_enforced=false</code>，<code>https_certificate</code> フィールド自体が存在しない＝証明書がまったく作られていない状態だった</li>
+</ul>
+<p><strong>対処</strong>: カスタムドメインを解除→再設定して証明書発行を再トリガした。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> api <span class="at">-X</span> PUT repos/kosugitti/kosugi-stats/pages <span class="at">-f</span> cname=              <span class="co"># 解除</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> api <span class="at">-X</span> PUT repos/kosugitti/kosugi-stats/pages <span class="at">-f</span> cname=stats.kosugitti.net  <span class="co"># 再設定</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 証明書 NONE → authorization_pending → approved（約20分）</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> api <span class="at">-X</span> PUT repos/kosugitti/kosugi-stats/pages <span class="at">-F</span> https_enforced=true</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>結果</strong>: <code>subject=CN=stats.kosugitti.net</code> / issuer=Let’s Encrypt YR1 / 有効期限 2026-10-30 の正しい証明書に置き換わり，HTTPS 200で疎通。<code>https_enforced=true</code>。</p>
+<ul>
+<li>ドメイン再設定の直後にPagesビルドが1回 <code>errored</code> になったが，直後の再ビルドが <code>built</code> で完了。一過性でサイト内容に影響なし</li>
+<li>実行時点では <code>http://</code> からの301リダイレクトが未反映（Fastlyのエッジキャッシュ切れ待ち・設定自体は入っている）</li>
+</ul>
+</section>
+<section id="他サイトの横断点検同じ問題がないか確認" class="level3">
+<h3 class="anchored" data-anchor-id="他サイトの横断点検同じ問題がないか確認">他サイトの横断点検（同じ問題がないか確認）</h3>
+<ul>
+<li>GitHub Pages有効リポジトリ21件を全チェック。カスタムドメイン使用は2件のみで，<code>kosugi-labo</code>（labo.kosugitti.net）は cert=approved・https_enforced=true で元から正常。残り19件は <code>*.github.io</code> 既定ドメインのため問題なし</li>
+<li>Pages以外も実接続で検査し全て正常: <code>kosugitti.net</code>，<code>www.kosugitti.net</code>，<code>www.psy.senshu-u.ac.jp</code>，<code>www3</code>，<code>ext</code>，<code>gico</code>，<code>kujira</code>，<code>sv1</code>，<code>sv2</code></li>
+</ul>
+<p><strong>引き継ぎ</strong>: <code>wundt.psy.senshu-u.ac.jp</code> は接続タイムアウトで応答なし（証明書ではなく到達性の問題。学外から不可か停止中）。今回は未着手なので気になるなら別途調査。</p>
+</section>
+</section>
 <section id="続き" class="level2">
 <h2 class="anchored" data-anchor-id="続き">2026-04-01（続き）</h2>
 <ul>
@@ -177,8 +253,8 @@ ul.task-list li input[type="checkbox"] {
 <li>CLAUDE.md にユーザ操作サポート手順を追記</li>
 </ul>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">2026-04-01</h2>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">2026-04-01</h2>
 <ul>
 <li>kosugi-stats リポジトリ新規作成（psychometrics_syllabus の教材サイト移転先）</li>
 <li>Quarto Website として構築（テーマ: cosmo, lang: ja）</li>
@@ -187,6 +263,11 @@ ul.task-list li input[type="checkbox"] {
 <li>GitHub Pages デプロイ完了: https://kosugitti.github.io/kosugi-stats/</li>
 <li>psychometrics_syllabus に kosugi-stats へのリダイレクト設置（index.html + 404.html）</li>
 </ul>
+</section>
+<section id="claude.mdからの退避-2026-07-17" class="level2">
+<h2 class="anchored" data-anchor-id="claude.mdからの退避-2026-07-17">CLAUDE.mdからの退避 (2026-07-17)</h2>
+<p>ホーム索引(~/Dropbox/CLAUDE.md)のステータスセル圧縮時の退避(退避時点の全文):</p>
+<p>サイト再構成・稼働中。ベイズ章群(b25-b29)シラバス再編完了。ch07/ch08の回帰例を勉強時間・単語数→テスト点に全面改訂(GPA&gt;4の誤り解消，図はggplot2/ragg/scatterplot3d/TikZ化，図8.5-8.8の矢印・配置も調整)。v3.29.3でビルド→kosugi-statsへ反映済。KDP公開版は旧m系のままで修正は全てV3(ch系)側，V3ベースで出し直す方針(夏休みの宿題)。残作業: ch29本文新規執筆(4節・現状白紙で最優先ブロッカー)，ch27本文圧縮(18.5k→10k字)＋章タイトルのシラバス同期，ch28 JASPバージョン更新，KDP用体裁ラッパ(BasicBook3_kdp.tex)移植，m系SEM章新規執筆。夏休みに集中執筆，普段は空き時間に1節ずつ。詳細→Git/kosugi-stats/WORKLOG.md，Git/psychometrics_syllabus/WORKLOG.md</p>
 
 
 </section>

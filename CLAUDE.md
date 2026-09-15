@@ -1,7 +1,7 @@
 # kosugi-stats プロジェクト
 
 ## 概要
-- **公開URL**: https://kosugitti.github.io/kosugi-stats/ (サブドメイン: stats.kosugitti.net)
+- **公開URL**: https://stats.kosugitti.net/ (GitHub Pages既定URL: https://kosugitti.github.io/kosugi-stats/)
 - **ローカル**: `~/Dropbox/Git/kosugi-stats/`
 - **形式**: Quarto Website (GitHub Pages, docs/デプロイ)
 - **用途**: 心理統計教育教材ポータル（psychometrics_syllabus の後継）
@@ -9,6 +9,11 @@
 
 ## 状態
 - 公開済み、稼働中
+- stats.kosugitti.net はHTTPS対応済み（Let's Encrypt証明書発行・`https_enforced=true`）
+
+### GitHub Pagesの証明書が効かなくなったら
+「安全なサイトではない」警告が出る場合，`gh api repos/kosugitti/kosugi-stats/pages` で
+`https_certificate.state` を確認する。`NONE` ならカスタムドメインを解除→再設定で発行が走る（詳細な手順と経緯はWORKLOG.md 2026-08-01）。
 
 ## 構成
 ```
