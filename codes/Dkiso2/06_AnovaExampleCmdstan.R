@@ -121,7 +121,9 @@ fit %>%
 ## 検定したい変数はweight，インデックス変数はteam2にあります。
 
 ## 以下がサンプルのデータセットです。オブジェクトbaseballからStanで用いるデータセットを作り，推定するコードを書いてください。
-baseball <- read_csv("baseball2020.csv") %>%
+baseball <- read_csv("BaseballDecade.csv") %>%
+  ## 2020年度のデータを取り出す
+  dplyr::filter(Year == "2020年度") %>%
   ## 変数の選択
   dplyr::select(team, weight) %>%
   ## チーム変数を要因型に

@@ -44,7 +44,7 @@ MCMCsummary <- function(MCMCsample) {
 
 # data plot ---------------------------------------------------------------
 
-dat <- read_csv("weight.csv")
+dat <- read_csv("Weight.csv")
 g <- dat %>%
   dplyr::mutate(date = as.Date(date)) %>%
   # dplyr::filter(date > "2019/01/01") %>%

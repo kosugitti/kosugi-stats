@@ -45,7 +45,7 @@ MCMCsummary <- function(MCMCsample) {
 
 # データの読み込み ----------------------------------------------------------------
 
-baseball <- read_csv("baseballDecade.csv")
+baseball <- read_csv("BaseballDecade.csv")
 
 dat <- baseball %>%
   filter(position == "投手") %>%

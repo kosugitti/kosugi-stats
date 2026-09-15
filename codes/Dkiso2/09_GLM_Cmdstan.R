@@ -68,9 +68,7 @@ fit$print(c("beta0", "beta1", "sig"))
 fitML <- lm(height ~ weight, data = dat)
 summary(fitML)
 
-fit.stanfit <- fit$output_files() %>% rstan::read_stan_csv()
-
-predY <- rstan::extract(fit.stanfit)$predY
+predY <- fit$draws("predY", format = "matrix")
 # 事後予測分布の描画
 bayesplot::ppc_dens_overlay(y = dataSet$Y, yrep = predY[1:10, ])
 bayesplot::ppc_intervals(

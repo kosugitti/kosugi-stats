@@ -45,7 +45,7 @@ MCMCsummary <- function(MCMCsample) {
 
 # データの読み込み ----------------------------------------------------------------
 
-dat <- read_csv("baseballDecade.csv")
+dat <- read_csv("BaseballDecade.csv")
 
 ## 分布の可視化
 dat %>%

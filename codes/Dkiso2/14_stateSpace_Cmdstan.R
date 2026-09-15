@@ -44,7 +44,7 @@ MCMCsummary <- function(MCMCsample) {
 
 # データ読み込み -----------------------------------------------------------------
 
-dat <- read_csv("weight.csv")
+dat <- read_csv("Weight.csv")
 
 ## 素描
 g <- dat %>%
