@@ -14,7 +14,7 @@ website:
       - href: index.qmd
         text: ホーム
       - href: basic.qmd
-        text: データ解析基礎
+        text: データ解析
       - href: applied.qmd
         text: データ解析応用
       - href: lectures.qmd

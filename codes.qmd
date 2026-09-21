@@ -17,7 +17,7 @@ title: "コードとデータ"
 | [chapter22exe2.csv](codes/SampleData/chapter22exe2.csv) | 分散分析課題用データセット2 |
 | [chapter22exe3.csv](codes/SampleData/chapter22exe3.csv) | 分散分析課題用データセット3 |
 
-## データ解析基礎 Rコード
+## データ解析 Rコード
 
 - [二群の平均値差](codes/Dkiso1/20_example.R)
 - [Rによる分散分析のコード](codes/Dkiso1/Chapter22ANOVA.R)
