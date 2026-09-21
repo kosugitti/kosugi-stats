@@ -12,7 +12,7 @@ title: "心理学データ解析基礎"
 
 パソコンやタブレットでご覧いただくことをお勧めします。
 
-- [心理学データ解析基礎 授業資料 Ver3](pdfs/BasicBook3.pdf) **2025年度版**{.version-info}
+- [心理学データ解析基礎 授業資料 Ver3](pdfs/BasicBook3.pdf) **2026年度版**{.version-info}
 - [心理学データ解析基礎 授業資料（旧版）](archive/Dkiso1_book.pdf) 2024年度までのバージョン{.version-info}
 
 ## Kindle Direct Publishing
