@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+  pre-render: python3 tools/update_versions.py
   resources:
     - "pdfs/**"
     - "archive/**"
@@ -8,7 +9,7 @@ project:
 
 website:
   title: "心理統計教育教材"
-  site-url: "https://kosugitti.github.io/kosugi-stats/"
+  site-url: "https://stats.kosugitti.net/"
   navbar:
     left:
       - href: index.qmd

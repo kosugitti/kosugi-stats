@@ -21,7 +21,34 @@ title: "心理学データ解析応用"
 
 - [Rstanの確認用コード](codes/Dkiso2/00_Appendix1_rstan.R)
 - [cmdstanrの確認用コード](codes/Dkiso2/00_Appendix1_cmdstanr.R)
-- 補助関数集(MCMCtoDF・MCMCsummary・map_estimation)：[cmdstanr版](codes/Dkiso2/00_Appendix2_functions.R)・[rstan版](codes/Dkiso2/00_Appendix2_functions_rstan.R)。分析コードの冒頭で `source()` して使います
+
+#### 補助関数(MCMCtoDF・MCMCsummary・map_estimation)
+
+テキストの「いんたーみっしょん」で紹介した3つの関数です。第3回以降の課題で毎回使います。下のコードを分析用スクリプトの冒頭に貼り付けるか，ファイルをダウンロードして `source()` で読み込んでください。
+
+- `MCMCtoDF(fit)`：MCMCサンプルを `chain`・`iter`・`name`・`value` の4列のデータフレームにします
+- `MCMCsummary(MCMCsample, prob = 0.95)`：EAP・MED・MAP・SD・区間・Rhat の要約表を作ります。90%区間なら `prob = 0.90` とします(列名も `L90`・`U90` に変わります)
+
+::: {.panel-tabset}
+
+## cmdstanr版
+
+ダウンロード：[00_Appendix2_functions.R](codes/Dkiso2/00_Appendix2_functions.R)
+
+```{.r}
+{{< include codes/Dkiso2/00_Appendix2_functions.R >}}
+```
+
+## rstan版
+
+ダウンロード：[00_Appendix2_functions_rstan.R](codes/Dkiso2/00_Appendix2_functions_rstan.R)
+
+```{.r}
+{{< include codes/Dkiso2/00_Appendix2_functions_rstan.R >}}
+```
+
+:::
+
 
 ### 各回のコード
 
