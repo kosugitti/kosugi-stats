@@ -19,26 +19,33 @@ MCMCtoDF <- function(fit) {
   fit$draws() %>%
     posterior::as_draws_df() %>%
     tibble::as_tibble() %>%
-    dplyr::select(-lp__, -.draw, -.chain, -.iteration) %>%
-    tibble::rowid_to_column("iter") %>%
-    tidyr::pivot_longer(-iter) -> MCMCsample
+    dplyr::select(-lp__, -.iteration) %>%
+    dplyr::rename(iter = .draw, chain = .chain) %>%
+    tidyr::pivot_longer(-c(chain, iter)) -> MCMCsample
   return(MCMCsample)
 }
 
 ## MCMCデータフレームを要約する関数
-MCMCsummary <- function(MCMCsample) {
+MCMCsummary <- function(MCMCsample, prob = 0.95) {
+  lower <- (1 - prob) / 2
+  upper <- 1 - lower
+  width <- round(prob * 100)
   MCMCsample %>%
+    dplyr::arrange(name, chain, iter) %>%
     dplyr::group_by(name) %>%
     dplyr::summarise(
       EAP = mean(value),
       MED = median(value),
       MAP = map_estimation(value),
       SD = sd(value),
-      L95 = quantile(value, prob = 0.025),
-      U95 = quantile(value, prob = 0.975),
-      Rhat = posterior::rhat_basic(value)
+      L = quantile(value, prob = lower),
+      U = quantile(value, prob = upper),
+      Rhat = posterior::rhat(matrix(value, ncol = max(chain)))
     ) %>%
-    mutate(across(where(is.numeric), ~ num(., digits = 3)))
+    dplyr::rename(!!paste0("L", width) := L,
+                  !!paste0("U", width) := U) %>%
+    dplyr::mutate(dplyr::across(dplyr::where(is.numeric),
+                                ~ pillar::num(., digits = 3)))
 }
 
 # モデル ---------------------------------------------------------------------
