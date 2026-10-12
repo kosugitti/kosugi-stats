@@ -2,6 +2,8 @@
 #  Programmed by kosugitti
 #  Licence ; Creative Commons BY-SA license (CC BY-SA) version 4.0
 ## Lesson 3. Seven scientist Rstan Version
+## テキスト第5講のコード(テキストは cmdstanr で書いている。ここではそれを rstan で書き直したもの)
+## Stanファイル sevenScientist.stan(テキストのコード5.1)をこのコードと同じフォルダに置くこと
 
 # 準備 ----------------------------------------------------------------------
 
@@ -32,9 +34,11 @@ fit <- rstan::sampling(model, data = list(Y = x))
 
 # トレースプロット ---------------------------------------------------------------
 
-traceplot(fit)
+## テキストのコード5.4に対応(mu のトレースプロット)
+traceplot(fit, pars = "mu")
 
 # Stanのオプション指定 ------------------------------------------------------------
+## テキストのコード5.5(ウォームアップ1000・サンプル4000)と同じ。rstan の iter はウォームアップを含む数
 
 fit <- rstan::sampling(model,
   data = list(Y = x),

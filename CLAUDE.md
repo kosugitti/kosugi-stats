@@ -72,12 +72,13 @@ codes/ の該当ディレクトリにファイルを置き、codes.qmd（また�
 
 ### 「バージョン番号を更新したい」と言われたら
 
-index.qmd のバージョン情報テーブルを編集:
-```
-| 基礎シラバス | 3.0.1 |
-| 基礎テキスト | 3.29.0 |
-...
-```
+手で書かない。`quarto render` の pre-render(`tools/update_versions.py`)が `pdfs/*.pdf` に印字された版数を読んで index.qmd の表を書き直す。PDF を差し替えて render するだけでよい。
+
+### 応用(Dkiso2)の各回のコードの約束(2026-10-12)
+
+- 正本はこのリポジトリの `codes/Dkiso2/`。**テキスト(psychometrics_syllabus の course_materials2/tex)の掲載コードに合わせる**(番号はテキストのコード番号をコメントに書く)
+- 各回のコードは冒頭で `source("00_Appendix2_functions.R")`(rstan 版は `_rstan.R`)を読み，Stan ファイルもプロジェクトフォルダ直下から読む。学生は関数集をフォルダに置き Stan ファイルを書けば R コードがそのまま走る
+- 関数集を直したら，classroom-autograder の `assets/Dkiso2/` にもコピーして deploy する(採点器が学生コードの前に読み込む)
 
 ---
 

@@ -2,6 +2,7 @@
 #  Programmed by kosugitti
 #  Licence ; Creative Commons BY-SA license (CC BY-SA) version 4.0
 ## Lesson 14. State Space Model Cmdstan version.
+## テキスト第16講「確率的プログラミング；状態空間モデル」のコード(番号はテキストのコード番号)
 
 # 準備 ----------------------------------------------------------------------
 
@@ -29,24 +30,42 @@ g
 # 状態空間モデル -----------------------------------------------------------------
 
 dat1 <- dat %>%
-  dplyr::filter(date > "2020/01/01") %>%
-  dplyr::mutate(date = as.Date(date))
+  filter(date > "2020/01/01") %>%
+  mutate(date = as.Date(date))
 
 model <- cmdstanr::cmdstan_model("StateSpace.stan")
 model$check_syntax()
 dataSet <- list(L = NROW(dat1), W = dat1$weight)
-fit <- model$sample(
+fit1 <- model$sample(
   data = dataSet,
   chains = 4,
   parallel_chains = 4
 )
 
-Est1 <-
-  fit %>%
-  MCMCtoDF() %>%
-  MCMCsummary() %>%
-  dplyr::filter(str_detect(name, "mu")) %>%
-  dplyr::mutate(ID = str_extract(name, pattern = "\\d+") %>% as.numeric()) %>%
+## MCMCサンプルを変数ごとに要約する(テキストのコード16.2と同じ形)
+fit1.df <- fit1$draws() %>%
+  posterior::as_draws_df() %>%
+  as_tibble() %>%
+  select(-.chain, -.iteration, -.draw) %>%
+  rowid_to_column("iter") %>%
+  pivot_longer(-iter, names_to = "Varname") %>%
+  group_by(Varname) %>%
+  summarise(
+    EAP = mean(value),
+    MED = median(value),
+    MAP = map_estimation(value),
+    SD = sd(value),
+    L95 = quantile(value, probs = 0.025),
+    L50 = quantile(value, probs = 0.25),
+    U50 = quantile(value, probs = 0.75),
+    U95 = quantile(value, probs = 0.975)
+  )
+
+
+Est1 <- fit1.df %>%
+  dplyr::filter(str_detect(Varname, "mu")) %>%
+  dplyr::mutate(ID = str_extract(Varname, pattern = "\\d+") %>% 
+  as.numeric()) %>%
   dplyr::arrange(ID)
 
 g <- dat1 %>%
@@ -67,19 +86,17 @@ dat1 %>%
   dplyr::mutate(FLG = date - lag) %>%
   dplyr::filter(FLG > 1)
 
-fullDays <- data.frame(date = as.Date("2020/01/01"):as.Date("2021/12/01")) %>%
-  dplyr::mutate(date = as.Date(date, origin = "1970-01-01")) %>%
-  dplyr::left_join(dat1, by = "date") %>%
+fullDays <- 
+  data.frame(date = as.Date("2020/01/01"):as.Date("2021/12/01")) %>%
+  mutate(date = as.Date(date, origin = "1970-01-01")) %>%
+  left_join(dat1, by = "date") %>%
   tidyr::replace_na(list(weight = 999, bodyFat = 999))
 
 model <- cmdstanr::cmdstan_model("StateSpace2.stan")
 model$check_syntax()
-dataSet <- list(
-  L = NROW(fullDays),
-  W = fullDays$weight,
-  Nmiss = sum(fullDays$weight == 999)
-)
-fit <- model$sample(
+dataSet <- list(L = NROW(fullDays), W = fullDays$weight, 
+                Nmiss = sum(fullDays$weight == 999))
+fit2 <- model$sample(
   data = dataSet,
   chains = 4,
   parallel_chains = 4,
@@ -87,20 +104,37 @@ fit <- model$sample(
   iter_sampling = 5000
 )
 
-Est2 <- fit %>%
-  MCMCtoDF() %>%
-  MCMCsummary() %>%
-  dplyr::filter(str_detect(name, "mu")) %>%
-  dplyr::filter(!str_detect(name, "muZero")) %>%
-  dplyr::mutate(ID = str_extract(name, pattern = "\\d+") %>% as.numeric()) %>%
+## MCMCサンプルを変数ごとに要約する(テキストのコード16.2と同じ形)
+fit2.df <- fit2$draws() %>%
+  posterior::as_draws_df() %>%
+  as_tibble() %>%
+  select(-.chain, -.iteration, -.draw) %>%
+  rowid_to_column("iter") %>%
+  pivot_longer(-iter, names_to = "Varname") %>%
+  group_by(Varname) %>%
+  summarise(
+    EAP = mean(value),
+    MED = median(value),
+    MAP = map_estimation(value),
+    SD = sd(value),
+    L95 = quantile(value, probs = 0.025),
+    L50 = quantile(value, probs = 0.25),
+    U50 = quantile(value, probs = 0.75),
+    U95 = quantile(value, probs = 0.975)
+  )
+
+
+Est2 <- fit2.df %>%
+  dplyr::filter(str_detect(Varname, "mu")) %>%
+  dplyr::filter(!str_detect(Varname, "muZero")) %>%
+  dplyr::mutate(ID = str_extract(Varname, pattern = "\\d+") %>% 
+  as.numeric()) %>%
   dplyr::arrange(ID) %>%
   dplyr::select(ID, MAP, U95, L95)
-Est2miss <-
-  fit %>%
-  MCMCtoDF() %>%
-  MCMCsummary() %>%
-  dplyr::filter(str_detect(name, "Miss_W")) %>%
-  dplyr::mutate(ID = str_extract(name, pattern = "\\d+") %>% as.numeric()) %>%
+Est2miss <- fit2.df %>%
+  dplyr::filter(str_detect(Varname, "Miss_W")) %>%
+  dplyr::mutate(ID = str_extract(Varname, pattern = "\\d+") %>% 
+  as.numeric()) %>%
   dplyr::arrange(ID) %>%
   dplyr::select(ID, MAP, U95, L95)
 
@@ -110,11 +144,7 @@ plotFunction <- function(fullDays, Est, MissEst) {
     rowid_to_column("ID") %>%
     left_join(Est, by = "ID") %>%
     rowwise() %>%
-    mutate(FLG = if (weight != 999) {
-      1
-    } else {
-      2
-    })
+    mutate(FLG = if (weight != 999) {1} else {2})
   misJ <- 1
   tmp$weight2 <- NA
   tmp$weight2U <- NA
@@ -159,12 +189,9 @@ fullDays <- data.frame(date = as.Date("2020/01/01"):as.Date("2021/12/31")) %>%
   dplyr::left_join(dat1, by = "date") %>%
   tidyr::replace_na(list(weight = 999))
 
-dataSet <- list(
-  L = NROW(fullDays),
-  W = fullDays$weight,
-  Nmiss = sum(fullDays$weight == 999)
-)
-fit <- model$sample(
+dataSet <- list(L = NROW(fullDays), W = fullDays$weight, 
+                Nmiss = sum(fullDays$weight == 999))
+fit3 <- model$sample(
   data = dataSet,
   chains = 4,
   parallel_chains = 4,
@@ -172,25 +199,45 @@ fit <- model$sample(
   iter_sampling = 5000
 )
 
+## MCMCサンプルを変数ごとに要約する(テキストのコード16.2と同じ形)
+fit3.df <- fit3$draws() %>%
+  posterior::as_draws_df() %>%
+  as_tibble() %>%
+  select(-.chain, -.iteration, -.draw) %>%
+  rowid_to_column("iter") %>%
+  pivot_longer(-iter, names_to = "Varname") %>%
+  group_by(Varname) %>%
+  summarise(
+    EAP = mean(value),
+    MED = median(value),
+    MAP = map_estimation(value),
+    SD = sd(value),
+    L95 = quantile(value, probs = 0.025),
+    L50 = quantile(value, probs = 0.25),
+    U50 = quantile(value, probs = 0.75),
+    U95 = quantile(value, probs = 0.975)
+  )
 
-Est3 <- fit %>%
-  MCMCtoDF() %>%
-  MCMCsummary() %>%
-  dplyr::filter(str_detect(name, "mu")) %>%
-  dplyr::filter(!str_detect(name, "muZero")) %>%
-  dplyr::mutate(ID = str_extract(name, pattern = "\\d+") %>% as.numeric()) %>%
+
+
+Est3 <- fit3.df %>%
+  dplyr::filter(str_detect(Varname, "mu")) %>%
+  dplyr::filter(!str_detect(Varname, "muZero")) %>%
+  dplyr::mutate(ID = str_extract(Varname, pattern = "\\d+") %>% 
+  as.numeric()) %>%
   dplyr::arrange(ID) %>%
   dplyr::select(ID, MAP, U95, L95)
-Est3miss <- fit %>%
-  MCMCtoDF() %>%
-  MCMCsummary() %>%
-  dplyr::filter(str_detect(name, "Miss_W")) %>%
-  dplyr::mutate(ID = str_extract(name, pattern = "\\d+") %>% as.numeric()) %>%
+Est3miss <- fit3.df %>%
+  dplyr::filter(str_detect(Varname, "Miss_W")) %>%
+  dplyr::mutate(ID = str_extract(Varname, pattern = "\\d+") %>% 
+  as.numeric()) %>%
   dplyr::arrange(ID) %>%
   dplyr::select(ID, MAP, U95, L95)
 
 
 plot.tmp <- plotFunction(fullDays, Est3, Est3miss)
+## 予想される2021年末の体重(テキストのコード16.8)
+plot.tmp %>% tail()
 
 g <- ggplot(data = plot.tmp) +
   geom_point(aes(x = date, y = weight2)) +
@@ -205,33 +252,51 @@ plot(g)
 
 model <- cmdstanr::cmdstan_model("StateSpace3.stan")
 model$check_syntax()
-fit <- model$sample(
+fit4 <- model$sample(
   data = dataSet,
   chains = 4,
   parallel_chains = 4,
   iter_sampling = 5000
 )
 
-Est4 <-
-  fit %>%
-  MCMCtoDF() %>%
-  MCMCsummary() %>%
-  dplyr::filter(str_detect(name, "mu")) %>%
-  dplyr::filter(!str_detect(name, "muZero")) %>%
-  dplyr::mutate(ID = str_extract(name, pattern = "\\d+") %>% as.numeric()) %>%
+## MCMCサンプルを変数ごとに要約する(テキストのコード16.2と同じ形)
+fit4.df <- fit4$draws() %>%
+  posterior::as_draws_df() %>%
+  as_tibble() %>%
+  select(-.chain, -.iteration, -.draw) %>%
+  rowid_to_column("iter") %>%
+  pivot_longer(-iter, names_to = "Varname") %>%
+  group_by(Varname) %>%
+  summarise(
+    EAP = mean(value),
+    MED = median(value),
+    MAP = map_estimation(value),
+    SD = sd(value),
+    L95 = quantile(value, probs = 0.025),
+    L50 = quantile(value, probs = 0.25),
+    U50 = quantile(value, probs = 0.75),
+    U95 = quantile(value, probs = 0.975)
+  )
+
+
+Est4 <- fit4.df %>%
+  dplyr::filter(str_detect(Varname, "mu")) %>%
+  dplyr::filter(!str_detect(Varname, "muZero")) %>%
+  dplyr::mutate(ID = str_extract(Varname, pattern = "\\d+") %>% 
+  as.numeric()) %>%
   dplyr::arrange(ID) %>%
   dplyr::select(ID, MAP, U95, L95)
-Est4miss <-
-  fit %>%
-  MCMCtoDF() %>%
-  MCMCsummary() %>%
-  dplyr::filter(str_detect(name, "Miss_W")) %>%
-  dplyr::mutate(ID = str_extract(name, pattern = "\\d+") %>% as.numeric()) %>%
+Est4miss <- fit4.df %>%
+  dplyr::filter(str_detect(Varname, "Miss_W")) %>%
+  dplyr::mutate(ID = str_extract(Varname, pattern = "\\d+") %>% 
+  as.numeric()) %>%
   dplyr::arrange(ID) %>%
   dplyr::select(ID, MAP, U95, L95)
 
 
 plot.tmp <- plotFunction(fullDays, Est4, Est4miss)
+## 2階差分トレンドで予想される2021年末の体重(テキストのコード16.10)
+plot.tmp %>% tail()
 
 g <- ggplot(data = plot.tmp) +
   geom_point(aes(x = date, y = weight2)) +
