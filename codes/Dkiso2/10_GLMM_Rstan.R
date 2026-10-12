@@ -11,44 +11,9 @@ library(bayesplot)
 library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
-## MAP関数
-map_estimation <- function(z) {
-  density(z)$x[which.max(density(z)$y)]
-}
-## MCMCサンプルをデータフレームにする関数
-MCMCtoDF <- function(fit) {
-  fit %>%
-    as.array() %>%
-    posterior::as_draws_df() %>%
-    tibble::as_tibble() %>%
-    dplyr::select(-lp__, -.iteration) %>%
-    dplyr::rename(iter = .draw, chain = .chain) %>%
-    tidyr::pivot_longer(-c(chain, iter)) -> MCMCsample
-  return(MCMCsample)
-}
-
-## MCMCデータフレームを要約する関数
-MCMCsummary <- function(MCMCsample, prob = 0.95) {
-  lower <- (1 - prob) / 2
-  upper <- 1 - lower
-  width <- round(prob * 100)
-  MCMCsample %>%
-    dplyr::arrange(name, chain, iter) %>%
-    dplyr::group_by(name) %>%
-    dplyr::summarise(
-      EAP = mean(value),
-      MED = median(value),
-      MAP = map_estimation(value),
-      SD = sd(value),
-      L = quantile(value, prob = lower),
-      U = quantile(value, prob = upper),
-      Rhat = posterior::rhat(matrix(value, ncol = max(chain)))
-    ) %>%
-    dplyr::rename(!!paste0("L", width) := L,
-                  !!paste0("U", width) := U) %>%
-    dplyr::mutate(dplyr::across(dplyr::where(is.numeric),
-                                ~ pillar::num(., digits = 3)))
-}
+## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
+## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
+source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
 
 # データの読み込み ----------------------------------------------------------------
 
