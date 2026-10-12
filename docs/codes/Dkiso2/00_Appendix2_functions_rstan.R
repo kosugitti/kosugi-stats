@@ -48,8 +48,8 @@ MCMCsummary <- function(MCMCsample, prob = 0.95) {
       MED = median(value),
       MAP = map_estimation(value),
       SD = sd(value),
-      L = quantile(value, prob = lower),
-      U = quantile(value, prob = upper),
+      L = unname(quantile(value, prob = lower)),
+      U = unname(quantile(value, prob = upper)),
       Rhat = posterior::rhat(matrix(value, ncol = max(chain)))
     ) %>%
     dplyr::rename(!!paste0("L", width) := L,

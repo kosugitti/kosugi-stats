@@ -310,8 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">MED =</span> <span class="fu">median</span>(value),</span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">MAP =</span> <span class="fu">map_estimation</span>(value),</span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">SD =</span> <span class="fu">sd</span>(value),</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">L =</span> <span class="fu">quantile</span>(value, <span class="at">prob =</span> lower),</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">U =</span> <span class="fu">quantile</span>(value, <span class="at">prob =</span> upper),</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">L =</span> <span class="fu">unname</span>(<span class="fu">quantile</span>(value, <span class="at">prob =</span> lower)),</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">U =</span> <span class="fu">unname</span>(<span class="fu">quantile</span>(value, <span class="at">prob =</span> upper)),</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">Rhat =</span> posterior<span class="sc">::</span><span class="fu">rhat</span>(<span class="fu">matrix</span>(value, <span class="at">ncol =</span> <span class="fu">max</span>(chain)))</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="sc">!!</span><span class="fu">paste0</span>(<span class="st">"L"</span>, width) <span class="sc">:</span><span class="er">=</span> L,</span>
@@ -372,8 +372,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">MED =</span> <span class="fu">median</span>(value),</span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">MAP =</span> <span class="fu">map_estimation</span>(value),</span>
 <span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">SD =</span> <span class="fu">sd</span>(value),</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">L =</span> <span class="fu">quantile</span>(value, <span class="at">prob =</span> lower),</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">U =</span> <span class="fu">quantile</span>(value, <span class="at">prob =</span> upper),</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">L =</span> <span class="fu">unname</span>(<span class="fu">quantile</span>(value, <span class="at">prob =</span> lower)),</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">U =</span> <span class="fu">unname</span>(<span class="fu">quantile</span>(value, <span class="at">prob =</span> upper)),</span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>      <span class="at">Rhat =</span> posterior<span class="sc">::</span><span class="fu">rhat</span>(<span class="fu">matrix</span>(value, <span class="at">ncol =</span> <span class="fu">max</span>(chain)))</span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="sc">!!</span><span class="fu">paste0</span>(<span class="st">"L"</span>, width) <span class="sc">:</span><span class="er">=</span> L,</span>
