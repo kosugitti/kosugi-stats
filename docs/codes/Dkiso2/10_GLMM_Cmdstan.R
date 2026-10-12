@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 
@@ -51,7 +52,7 @@ dataSet <- list(
 )
 
 ### コンパイルと推定
-model <- cmdstanr::cmdstan_model("cmdstan/glmm_poisson.stan")
+model <- cmdstanr::cmdstan_model("glmm_poisson.stan")
 model$check_syntax()
 
 fit <- model$sample(
@@ -77,7 +78,7 @@ dat <- baseball %>%
   dplyr::filter(salary > 2500) %>%
   dplyr::select(Year, Name, salary, AtBats, Hit, Games, HR)
 
-model <- cmdstanr::cmdstan_model("cmdstan/glmm_binomial.stan")
+model <- cmdstanr::cmdstan_model("glmm_binomial.stan")
 model$check_syntax()
 
 dat.tmp <- dat %>%
@@ -132,7 +133,7 @@ dataSet <- list(
   Y = dat.tmp$Win
 )
 
-model <- cmdstan_model("cmdstan/hlm_poisson.stan")
+model <- cmdstan_model("hlm_poisson.stan")
 model$check_syntax()
 
 fit <- model$sample(

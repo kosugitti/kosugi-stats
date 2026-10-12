@@ -12,8 +12,9 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 # データ読み込み -----------------------------------------------------------------
 
@@ -31,7 +32,7 @@ dat1 <- dat %>%
   dplyr::filter(date > "2020/01/01") %>%
   dplyr::mutate(date = as.Date(date))
 
-model <- rstan::stan_model("rstan/StateSpace.stan")
+model <- rstan::stan_model("StateSpace.stan")
 dataSet <- list(L = NROW(dat1), W = dat1$weight)
 fit <- rstan::sampling(model,
   data = dataSet,
@@ -71,7 +72,7 @@ fullDays <- data.frame(date = as.Date("2020/01/01"):as.Date("2021/12/01")) %>%
   dplyr::left_join(dat1, by = "date") %>%
   tidyr::replace_na(list(weight = 999, bodyFat = 999))
 
-model <- rstan::stan_model("rstan/StateSpace2.stan")
+model <- rstan::stan_model("StateSpace2.stan")
 dataSet <- list(
   L = NROW(fullDays),
   W = fullDays$weight,
@@ -196,7 +197,7 @@ plot(g)
 
 # 二階差分 --------------------------------------------------------------------
 
-model <- rstan::stan_model("rstan/StateSpace3.stan")
+model <- rstan::stan_model("StateSpace3.stan")
 fit <- rstan::sampling(
   model,
   data = dataSet,

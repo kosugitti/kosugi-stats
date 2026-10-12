@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 
@@ -62,9 +63,9 @@ plot(g3)
 
 # Stanによる推定 ---------------------------------------------------------------
 
-model_1pl <- cmdstan_model("cmdstan/oneParameter.stan")
-model_2pl <- cmdstan_model("cmdstan/twoParameters.stan")
-model_3pl <- cmdstan_model("cmdstan/threeParameters.stan")
+model_1pl <- cmdstan_model("oneParameter.stan")
+model_2pl <- cmdstan_model("twoParameters.stan")
+model_3pl <- cmdstan_model("threeParameters.stan")
 
 model_1pl$check_syntax()
 model_2pl$check_syntax()
@@ -182,7 +183,7 @@ dataSet <- list(
   resp = dat.tmp$value
 )
 
-model_2pl_ver2 <- cmdstan_model("cmdstan/twoParameters2.stan")
+model_2pl_ver2 <- cmdstan_model("twoParameters2.stan")
 model_2pl_ver2$check_syntax()
 fit2.2 <- model_2pl_ver2$sample(
   data = dataSet,

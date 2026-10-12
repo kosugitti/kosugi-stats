@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 # LM ----------------------------------------------------------------------
 
@@ -22,7 +23,7 @@ dat %>% ggplot(aes(x = weight, y = height)) +
   geom_point() +
   geom_smooth(formula = "y~x", method = "lm", se = FALSE)
 
-model <- cmdstan_model("cmdstan/LM.stan")
+model <- cmdstan_model("LM.stan")
 model$check_syntax()
 
 fit <- model$sample(
@@ -66,7 +67,7 @@ dat2 %>%
     method.args = list(family = binomial(link = "logit"))
   )
 
-model <- cmdstanr::cmdstan_model("cmdstan/logistic.stan")
+model <- cmdstanr::cmdstan_model("logistic.stan")
 model$check_syntax()
 dataSet <- list(N = NROW(dat2), Y = dat2$Pitcher, X = dat2$Games)
 

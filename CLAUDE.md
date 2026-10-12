@@ -84,3 +84,5 @@ index.qmd のバージョン情報テーブルを編集:
 ## 次
 - PsyStatsPracticals の統合検討
 - PDF更新ワークフローの自動化
+
+- **ホームの版数表は手で書かない**: `quarto render` の pre-render で `tools/update_versions.py` が `pdfs/*.pdf` の冒頭の「version X.Y.Z」を読んで index.qmd の表を書き直す(pdftotext が無いマシンでは何もしない)。表に資料を足すときはスクリプトの ROWS に足す。応用の事前準備の関数コードは `codes/Dkiso2/00_Appendix2_functions*.R` を include しているので，関数を直せばページも追随する(2026-10-12)

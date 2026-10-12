@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 # データなど -------------------------------------------------------------------
@@ -25,7 +26,7 @@ t.test(groupA, groupB, var.equal = TRUE)
 
 
 # Modeling ----------------------------------------------------------------
-model <- cmdstanr::cmdstan_model("cmdstan/ttest01.stan")
+model <- cmdstanr::cmdstan_model("ttest01.stan")
 model$check_syntax()
 dataSet <- list(X1 = groupA, X2 = groupB, N1 = 8, N2 = 8)
 
@@ -90,7 +91,7 @@ MCMCsample %>%
 
 # Generated quantities ----------------------------------------------------
 
-model <- cmdstanr::cmdstan_model("cmdstan/ttest03.stan")
+model <- cmdstanr::cmdstan_model("ttest03.stan")
 model$check_syntax()
 groupA <- c(30, 50, 70, 90, 60, 50, 70, 60)
 groupB <- c(30, 45, 60, 40, 60, 50, 40, 30)

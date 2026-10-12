@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 # データなど -------------------------------------------------------------------
@@ -21,7 +22,7 @@ groupB <- c(20, 40, 60, 40, 40, 50, 40, 30)
 
 # Modeling ----------------------------------------------------------------
 
-model <- cmdstanr::cmdstan_model("cmdstan/ttest05.stan")
+model <- cmdstanr::cmdstan_model("ttest05.stan")
 model$check_syntax()
 dataSet <- list(X1 = groupA, X2 = groupB, N1 = 8, N2 = 8)
 
@@ -68,7 +69,7 @@ bayesplot::ppc_hist(y = groupA, yrep = pred[sample(nrow(pred), 15), ])
 
 # 優越率と閾上率 -----------------------------------------------------------------
 
-model <- cmdstanr::cmdstan_model("cmdstan/ttest06.stan")
+model <- cmdstanr::cmdstan_model("ttest06.stan")
 model$check_syntax()
 groupA <- c(30, 50, 70, 90, 60, 50, 70, 60)
 groupB <- c(20, 40, 60, 40, 40, 50, 40, 30)
@@ -105,7 +106,7 @@ t.test(X1, X2)
 ## ベイズ推定(MCMCによるベイズ推定と差の分布)
 dataSet <- list(X1 = X1, X2 = X2, N1 = N, N2 = N)
 
-model <- cmdstanr::cmdstan_model("cmdstan/ttest03.stan")
+model <- cmdstanr::cmdstan_model("ttest03.stan")
 model$check_syntax()
 fit <- model$sample(
   data = dataSet,
@@ -138,7 +139,7 @@ t.test(X1, X2)
 
 ## ベイズ推定(MCMCによるベイズ推定と差の分布)
 dataSet <- list(X1 = X1, X2 = X2, N1 = N, N2 = N, C = 3)
-model <- cmdstanr::cmdstan_model("cmdstan/ttest03.stan")
+model <- cmdstanr::cmdstan_model("ttest03.stan")
 model$check_syntax()
 fit <- model$sample(
   data = dataSet,

@@ -11,8 +11,9 @@ library(cmdstanr)
 library(bayesplot)
 library(MASS)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 
@@ -33,7 +34,7 @@ N <- 100
 X <- mvrnorm(N, mu, SIG)
 
 dataSet <- list(N = N, X = X)
-model <- cmdstanr::cmdstan_model("cmdstan/paired_t.stan")
+model <- cmdstanr::cmdstan_model("paired_t.stan")
 model$check_syntax()
 fit <- model$sample(
   data = dataSet,
@@ -66,7 +67,7 @@ dataSet <- list(
   val = tidy_data$value
 )
 
-model <- cmdstanr::cmdstan_model("cmdstan/paired_t_tidy.stan")
+model <- cmdstanr::cmdstan_model("paired_t_tidy.stan")
 model$check_syntax()
 fit <- model$sample(
   data = dataSet,

@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 # データ ---------------------------------------------------------------------
 
@@ -20,7 +21,7 @@ x <- c(-27.020, 3.570, 8.191, 9.898, 9.603, 9.945, 10.056)
 # stanのコンパイル
 ## cmdstanの場合
 library(cmdstanr)
-model <- cmdstanr::cmdstan_model("cmdstan/sevenScientist.stan")
+model <- cmdstanr::cmdstan_model("sevenScientist.stan")
 model$check_syntax()
 fit <- model$sample(
   data = list(Y = x),

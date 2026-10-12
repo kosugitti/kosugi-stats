@@ -12,8 +12,9 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 
 # LM ----------------------------------------------------------------------
@@ -25,7 +26,7 @@ dat %>% ggplot(aes(x = weight, y = height)) +
   geom_point() +
   geom_smooth(formula = "y~x", method = "lm", se = FALSE)
 
-model <- rstan::stan_model("rstan/LM.stan")
+model <- rstan::stan_model("LM.stan")
 fit <- sampling(model,
   data = dataSet,
   chains = 4,
@@ -69,7 +70,7 @@ dat2 %>%
     method.args = list(family = binomial(link = "logit"))
   )
 
-model <- rstan::stan_model("rstan/logistic.stan")
+model <- rstan::stan_model("logistic.stan")
 dataSet <- list(N = NROW(dat2), Y = dat2$Pitcher, X = dat2$Games)
 
 fit.logistic <- rstan::sampling(model,

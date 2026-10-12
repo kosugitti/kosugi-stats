@@ -12,8 +12,9 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 # データの読み込み ----------------------------------------------------------------
 
@@ -51,7 +52,7 @@ dataSet <- list(
 )
 
 ### コンパイルと推定
-model <- rstan::stan_model("rstan/glmm_poisson.stan")
+model <- rstan::stan_model("glmm_poisson.stan")
 fit <- rstan::sampling(model,
   data = dataSet,
   chains = 4,
@@ -74,7 +75,7 @@ dat <- baseball %>%
   dplyr::filter(salary > 2500) %>%
   dplyr::select(Year, Name, salary, AtBats, Hit, Games, HR)
 
-model <- cmdstanr::cmdstan_model("cmdstan/glmm_binomial.stan")
+model <- cmdstanr::cmdstan_model("glmm_binomial.stan")
 
 dat.tmp <- dat %>%
   dplyr::mutate(salary = salary / 1000) %>%
@@ -128,7 +129,7 @@ dataSet <- list(
   Y = dat.tmp$Win
 )
 
-model <- rstan::stan_model("rstan/hlm_poisson.stan")
+model <- rstan::stan_model("hlm_poisson.stan")
 
 fit_glmm <- rstan::sampling(
   model,

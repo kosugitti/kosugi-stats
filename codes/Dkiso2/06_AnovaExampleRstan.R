@@ -12,13 +12,14 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 # サンプルデータ -----------------------------------------------------------------
 
 
-model <- rstan::stan_model("rstan/BetweenAnova.stan")
+model <- rstan::stan_model("BetweenAnova.stan")
 Example <- matrix(c(6, 6, 5, 5, 7, 4, 7, 6, 4, 3, 4, 6), ncol = 4, byrow = T)
 dataSet <- list(Lv = 3, N = 4, X = Example)
 
@@ -51,7 +52,7 @@ dat <- data.frame(
   value = X
 )
 
-model <- rstan::stan_model("rstan/BetweenAnova2.stan")
+model <- rstan::stan_model("BetweenAnova2.stan")
 dataSet <- list(Lv = Lv, L = NROW(dat), idx = dat$Idx, X = dat$value)
 fit <- rstan::sampling(
   model,

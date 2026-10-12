@@ -3,9 +3,9 @@
 # 3つの関数(map_estimation・MCMCtoDF・MCMCsummary)をまとめたもの。
 # 第3回以降の課題で繰り返し使う。rstan を使う人は 00_Appendix2_functions_rstan.R を読み込むこと。
 #
-# 使い方: 分析コードの冒頭で読み込む(ダウンロードしなくても URL から直接読める)
-#   source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
-# 各回のサンプルコードも冒頭でこの1行を使っている。
+# 使い方: このファイルをプロジェクトフォルダに置き，分析コードの冒頭で読み込む
+#   source("00_Appendix2_functions.R")
+# 各回のサンプルコードも冒頭でこの1行を使っている(Stanファイルも同じフォルダに置く)。
 #
 #   fit %>% MCMCtoDF() %>% MCMCsummary()              # 95%区間(L95, U95)
 #   fit %>% MCMCtoDF() %>% MCMCsummary(prob = 0.90)   # 90%区間(L90, U90)

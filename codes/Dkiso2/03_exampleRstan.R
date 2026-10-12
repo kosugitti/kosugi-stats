@@ -12,8 +12,9 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 
 # データ ---------------------------------------------------------------------
@@ -25,7 +26,7 @@ x <- c(-27.020, 3.570, 8.191, 9.898, 9.603, 9.945, 10.056)
 library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
-model <- rstan::stan_model("rstan/sevenScientist.stan")
+model <- rstan::stan_model("sevenScientist.stan")
 fit <- rstan::sampling(model, data = list(Y = x))
 
 

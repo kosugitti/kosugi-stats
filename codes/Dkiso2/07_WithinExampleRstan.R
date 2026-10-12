@@ -13,8 +13,9 @@ options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 library(MASS)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 
 # リバース・リバースエンジニアリング -------------------------------------------------------
@@ -33,7 +34,7 @@ X <- mvrnorm(N, mu, SIG)
 
 dataSet <- list(N = N, X = X)
 
-model <- rstan::stan_model("rstan/paired_t.stan")
+model <- rstan::stan_model("paired_t.stan")
 fit <- rstan::sampling(model,
   data = dataSet,
   chains = 4,
@@ -65,7 +66,7 @@ dataSet <- list(
   val = tidy_data$value
 )
 
-model <- rstan::stan_model("rstan/paired_t_tidy.stan")
+model <- rstan::stan_model("paired_t_tidy.stan")
 fit <- rstan::sampling(model,
   data = dataSet,
   chains = 4,

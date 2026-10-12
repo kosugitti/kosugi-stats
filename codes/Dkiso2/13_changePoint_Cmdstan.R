@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 # data plot ---------------------------------------------------------------
@@ -41,7 +42,7 @@ g <- dat1 %>%
 g
 
 
-model <- cmdstanr::cmdstan_model("cmdstan/changePoint1.stan")
+model <- cmdstanr::cmdstan_model("changePoint1.stan")
 model$check_syntax()
 dataSet <- list(L = NROW(dat1), W = dat1$weight)
 fit <- model$sample(
@@ -98,7 +99,7 @@ dat2 <- dat %>%
   dplyr::filter(date > "2021/01/01") %>%
   dplyr::filter(date < "2021/11/01")
 
-model <- cmdstanr::cmdstan_model("cmdstan/changePoint2.stan")
+model <- cmdstanr::cmdstan_model("changePoint2.stan")
 model$check_syntax()
 dataSet <- list(L = NROW(dat2), W = dat2$weight)
 fit <- model$sample(
@@ -155,7 +156,7 @@ dat3 <- dat %>%
   tibble::rowid_to_column("cDate")
 
 
-model <- cmdstanr::cmdstan_model("cmdstan/changePoint3.stan")
+model <- cmdstanr::cmdstan_model("changePoint3.stan")
 model$check_syntax()
 dataSet <- list(L = NROW(dat3), X = dat3$cDate, W = dat3$weight)
 fit <- model$sample(
@@ -194,7 +195,7 @@ g
 # 折れ線ひっつけモデル ---------------------------------------------------------------
 
 
-model <- cmdstanr::cmdstan_model("cmdstan/changePoint3b.stan")
+model <- cmdstanr::cmdstan_model("changePoint3b.stan")
 model$check_syntax()
 dataSet <- list(L = NROW(dat3), X = dat3$cDate, W = dat3$weight)
 fit <- model$sample(

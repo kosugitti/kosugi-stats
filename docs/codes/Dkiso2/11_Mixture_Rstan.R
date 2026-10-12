@@ -12,8 +12,9 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 # データの読み込み ----------------------------------------------------------------
 
@@ -40,7 +41,7 @@ dat.tmp <- dat %>%
   tibble::rowid_to_column("ID")
 
 dataSet <- list(K = 2, L = NROW(dat.tmp), Y = dat.tmp$salary.log)
-model <- rstan::stan_model("rstan/latent.stan")
+model <- rstan::stan_model("latent.stan")
 
 ## サンプリングの際に，Rhatがうまくいかないことがあれば，違うseed値でやり直してみてください。
 fit <- sampling(model,
@@ -91,7 +92,7 @@ dat.tmp <- dat %>%
   dplyr::filter(Games > 50) %>%
   dplyr::select(Save)
 
-model <- rstan::stan_model("rstan/ziPoisson.stan")
+model <- rstan::stan_model("ziPoisson.stan")
 
 dataSet <- list(L = NROW(dat.tmp), Y = dat.tmp$Save)
 fit <- sampling(model,
@@ -150,7 +151,7 @@ dat.tmp <- dat %>%
   dplyr::select(Save, salary) %>%
   dplyr::mutate(salary = salary / 1000)
 
-model <- rstan::stan_model("rstan/ziPoisson2.stan")
+model <- rstan::stan_model("ziPoisson2.stan")
 dataSet <- list(L = NROW(dat.tmp), Y = dat.tmp$Save, X = dat.tmp$salary)
 fit <- sampling(model,
   data = dataSet,

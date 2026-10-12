@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 
@@ -40,7 +41,7 @@ dat.tmp <- dat %>%
   tibble::rowid_to_column("ID")
 
 dataSet <- list(K = 2, L = NROW(dat.tmp), Y = dat.tmp$salary.log)
-model <- cmdstanr::cmdstan_model("cmdstan/latent.stan")
+model <- cmdstanr::cmdstan_model("latent.stan")
 model$check_syntax()
 
 ## サンプリングの際に，Rhatがうまくいかないことがあれば，違うseed値でやり直してみてください。
@@ -91,7 +92,7 @@ dat.tmp <- dat %>%
   dplyr::filter(Games > 50) %>%
   dplyr::select(Save)
 
-model <- cmdstan_model("cmdstan/ziPoisson.stan")
+model <- cmdstan_model("ziPoisson.stan")
 model$check_syntax()
 
 dataSet <- list(L = NROW(dat.tmp), Y = dat.tmp$Save)
@@ -150,7 +151,7 @@ dat.tmp <- dat %>%
   dplyr::select(Save, salary) %>%
   dplyr::mutate(salary = salary / 1000)
 
-model <- cmdstan_model("cmdstan/ziPoisson2.stan")
+model <- cmdstan_model("ziPoisson2.stan")
 model$check_syntax()
 dataSet <- list(L = NROW(dat.tmp), Y = dat.tmp$Save, X = dat.tmp$salary)
 fit <- model$sample(

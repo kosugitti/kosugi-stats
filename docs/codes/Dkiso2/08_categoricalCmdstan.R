@@ -10,12 +10,13 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 # モデル ---------------------------------------------------------------------
 
-model <- cmdstanr::cmdstan_model("cmdstan/categorical1.stan")
+model <- cmdstanr::cmdstan_model("categorical1.stan")
 model$check_syntax()
 fit <- model$sample(
   data = list(K = 3, X = c(51, 45, 27)),
@@ -42,7 +43,7 @@ pe <- ((a + b) * (a + c) + (b + d) * (c + d)) / n / n
 
 
 ### モデルによる推定
-model <- cmdstanr::cmdstan_model("cmdstan/kappa.stan")
+model <- cmdstanr::cmdstan_model("kappa.stan")
 model$check_syntax()
 dataSet <- list(Y = c(55, 16, 14, 35))
 fit <- model$sample(

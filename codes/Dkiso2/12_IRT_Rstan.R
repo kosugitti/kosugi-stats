@@ -12,8 +12,9 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 # データの読み込み ----------------------------------------------------------------
 
@@ -62,9 +63,9 @@ plot(g3)
 
 # Stanによる推定 ---------------------------------------------------------------
 
-model_1pl <- stan_model("rstan/oneParameter.stan")
-model_2pl <- stan_model("rstan/twoParameters.stan")
-model_3pl <- stan_model("rstan/threeParameters.stan")
+model_1pl <- stan_model("oneParameter.stan")
+model_2pl <- stan_model("twoParameters.stan")
+model_3pl <- stan_model("threeParameters.stan")
 
 dataSet <- list(N = NROW(dat), M = NCOL(dat), resp = as.matrix(dat))
 fit1 <- rstan::sampling(model_1pl, data = dataSet, iter = 6000, warmup = 1000)
@@ -180,7 +181,7 @@ dataSet <- list(
   resp = dat.tmp$value
 )
 
-model_2pl_ver2 <- rstan::stan_model("rstan/twoParameters2.stan")
+model_2pl_ver2 <- rstan::stan_model("twoParameters2.stan")
 
 fit2.2 <- rstan::sampling(
   model_2pl_ver2,

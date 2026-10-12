@@ -10,8 +10,9 @@ library(tidyverse)
 library(cmdstanr)
 library(bayesplot)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions.R")
 
 
 # データ読み込み -----------------------------------------------------------------
@@ -31,7 +32,7 @@ dat1 <- dat %>%
   dplyr::filter(date > "2020/01/01") %>%
   dplyr::mutate(date = as.Date(date))
 
-model <- cmdstanr::cmdstan_model("cmdstan/StateSpace.stan")
+model <- cmdstanr::cmdstan_model("StateSpace.stan")
 model$check_syntax()
 dataSet <- list(L = NROW(dat1), W = dat1$weight)
 fit <- model$sample(
@@ -71,7 +72,7 @@ fullDays <- data.frame(date = as.Date("2020/01/01"):as.Date("2021/12/01")) %>%
   dplyr::left_join(dat1, by = "date") %>%
   tidyr::replace_na(list(weight = 999, bodyFat = 999))
 
-model <- cmdstanr::cmdstan_model("cmdstan/StateSpace2.stan")
+model <- cmdstanr::cmdstan_model("StateSpace2.stan")
 model$check_syntax()
 dataSet <- list(
   L = NROW(fullDays),
@@ -202,7 +203,7 @@ plot(g)
 
 # 二階差分 --------------------------------------------------------------------
 
-model <- cmdstanr::cmdstan_model("cmdstan/StateSpace3.stan")
+model <- cmdstanr::cmdstan_model("StateSpace3.stan")
 model$check_syntax()
 fit <- model$sample(
   data = dataSet,

@@ -12,12 +12,13 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 # モデル ---------------------------------------------------------------------
 
-model <- rstan::stan_model("rstan/categorical1.stan")
+model <- rstan::stan_model("categorical1.stan")
 fit <- rstan::sampling(model,
   data = list(K = 3, X = c(51, 45, 27)),
   chains = 4,
@@ -43,7 +44,7 @@ pe <- ((a + b) * (a + c) + (b + d) * (c + d)) / n / n
 
 
 ### モデルによる推定
-model <- rstan::stan_model("rstan/kappa.stan")
+model <- rstan::stan_model("kappa.stan")
 dataSet <- list(Y = c(55, 16, 14, 35))
 fit <- sampling(model,
   data = dataSet,

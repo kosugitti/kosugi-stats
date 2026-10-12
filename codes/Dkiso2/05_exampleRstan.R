@@ -12,8 +12,9 @@ library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 ## 補助関数(map_estimation・MCMCtoDF・MCMCsummary)を読み込む
-## 中身はサイトの「データ解析応用」ページの「事前準備」とテキストの「いんたーみっしょん」を参照
-source("https://stats.kosugitti.net/codes/Dkiso2/00_Appendix2_functions_rstan.R")
+## 関数集はサイトの「データ解析応用」ページの「事前準備」からダウンロードし，
+## このコードと同じプロジェクトフォルダに置いておく。Stanファイルも同じフォルダに置く
+source("00_Appendix2_functions_rstan.R")
 
 # データなど -------------------------------------------------------------------
 
@@ -22,7 +23,7 @@ groupB <- c(20, 40, 60, 40, 40, 50, 40, 30)
 
 # Modeling ----------------------------------------------------------------
 
-model <- rstan::stan_model("rstan/ttest05.stan")
+model <- rstan::stan_model("ttest05.stan")
 dataSet <- list(X1 = groupA, X2 = groupB, N1 = 8, N2 = 8)
 
 fit <- rstan::sampling(model,
@@ -69,7 +70,7 @@ bayesplot::ppc_hist(y = groupA, yrep = pred[sample(nrow(pred), 15), ])
 
 # 優越率と閾上率 -----------------------------------------------------------------
 
-model <- rstan::stan_model("rstan/ttest06.stan")
+model <- rstan::stan_model("ttest06.stan")
 groupA <- c(30, 50, 70, 90, 60, 50, 70, 60)
 groupB <- c(20, 40, 60, 40, 40, 50, 40, 30)
 dataSet <- list(X1 = groupA, X2 = groupB, N1 = 8, N2 = 8, C = 3)
@@ -104,7 +105,7 @@ t.test(X1, X2)
 ## ベイズ推定(MCMCによるベイズ推定と差の分布)
 dataSet <- list(X1 = X1, X2 = X2, N1 = N, N2 = N)
 
-model <- rstan::stan_model("rstan/ttest03.stan")
+model <- rstan::stan_model("ttest03.stan")
 fit <- rstan::sampling(model,
   data = dataSet,
   chains = 4,
@@ -136,7 +137,7 @@ t.test(X1, X2)
 
 ## ベイズ推定(MCMCによるベイズ推定と差の分布)
 dataSet <- list(X1 = X1, X2 = X2, N1 = N, N2 = N, C = 3)
-model <- rstan::stan_model("rstan/ttest03.stan")
+model <- rstan::stan_model("ttest03.stan")
 fit <- rstan::sampling(model,
   data = dataSet,
   chains = 4,
