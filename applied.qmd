@@ -21,6 +21,7 @@ title: "心理学データ解析応用"
 
 - [Rstanの確認用コード](codes/Dkiso2/00_Appendix1_rstan.R)
 - [cmdstanrの確認用コード](codes/Dkiso2/00_Appendix1_cmdstanr.R)
+- 補助関数集(MCMCtoDF・MCMCsummary・map_estimation)：[cmdstanr版](codes/Dkiso2/00_Appendix2_functions.R)・[rstan版](codes/Dkiso2/00_Appendix2_functions_rstan.R)。分析コードの冒頭で `source()` して使います
 
 ### 各回のコード
 

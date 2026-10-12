@@ -186,7 +186,7 @@
     "href": "applied.html#rコード応用2",
     "title": "心理学データ解析応用",
     "section": "Rコード（応用2）",
-    "text": "Rコード（応用2）\n\n事前準備\n\nRstanの確認用コード\ncmdstanrの確認用コード\n\n\n\n各回のコード\n\n\n\n回\nテーマ\nrstan\ncmdstan\n\n\n\n\n01\nプログラミングの基礎\n01\n\n\n\n02\nデータ生成モデリング\n02\n\n\n\n03\nベイジアンアプローチと確率的プログラミング\nrstan\ncmdstan\n\n\n04\n二群の平均値の差\nrstan\ncmdstan\n\n\n05\nパラメータの世界とデータの世界\nrstan\ncmdstan\n\n\n06\n多群の平均値差モデル\nrstan\ncmdstan\n\n\n07\n対応のある群の比較\nrstan\ncmdstan\n\n\n08\nカテゴリカル分布を使って\nrstan\ncmdstan\n\n\n09\n一般化線形モデル\nrstan\ncmdstan\n\n\n10\n階層線形モデル\nrstan\ncmdstan\n\n\n11\n混合分布モデル\nrstan\ncmdstan\n\n\n12\n項目反応理論\nrstan\ncmdstan\n\n\n13\n変化点と折れ線回帰\nrstan\ncmdstan\n\n\n14\n状態空間モデル\nrstan\ncmdstan"
+    "text": "Rコード（応用2）\n\n事前準備\n\nRstanの確認用コード\ncmdstanrの確認用コード\n補助関数集(MCMCtoDF・MCMCsummary・map_estimation)：cmdstanr版・rstan版。分析コードの冒頭で source() して使います\n\n\n\n各回のコード\n\n\n\n回\nテーマ\nrstan\ncmdstan\n\n\n\n\n01\nプログラミングの基礎\n01\n\n\n\n02\nデータ生成モデリング\n02\n\n\n\n03\nベイジアンアプローチと確率的プログラミング\nrstan\ncmdstan\n\n\n04\n二群の平均値の差\nrstan\ncmdstan\n\n\n05\nパラメータの世界とデータの世界\nrstan\ncmdstan\n\n\n06\n多群の平均値差モデル\nrstan\ncmdstan\n\n\n07\n対応のある群の比較\nrstan\ncmdstan\n\n\n08\nカテゴリカル分布を使って\nrstan\ncmdstan\n\n\n09\n一般化線形モデル\nrstan\ncmdstan\n\n\n10\n階層線形モデル\nrstan\ncmdstan\n\n\n11\n混合分布モデル\nrstan\ncmdstan\n\n\n12\n項目反応理論\nrstan\ncmdstan\n\n\n13\n変化点と折れ線回帰\nrstan\ncmdstan\n\n\n14\n状態空間モデル\nrstan\ncmdstan"
   },
   {
     "objectID": "applied.html#旧版アーカイブ",

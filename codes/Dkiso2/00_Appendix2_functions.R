@@ -1,6 +1,12 @@
-# 心理学データ解析応用2 補助関数集
+# 心理学データ解析応用2 補助関数集(cmdstanr版)
 # テキスト「いんたーみっしょん；Stanの概略と環境の準備について」で紹介した
 # 3つの関数をまとめたもの。第3回以降の課題で繰り返し使う。
+# rstan を使う人は 00_Appendix2_functions_rstan.R を読み込むこと。
+#
+# MCMCsummary の列は EAP, MED, MAP, SD, L95, U95, Rhat(各回のサンプルコードと同じ)。
+# 95%以外の区間(たとえば90%)が要るときは，MCMCtoDF の結果から
+#   quantile(value, prob = c(0.05, 0.95))
+# のように自分で計算すること。
 #
 # 使い方: 分析コードの冒頭で読み込む
 #   source("00_Appendix2_functions.R")
@@ -38,8 +44,9 @@ MCMCsummary <- function(MCMCsample) {
       MED = median(value),
       MAP = map_estimation(value),
       SD = sd(value),
+      L95 = quantile(value, prob = 0.025),
       U95 = quantile(value, prob = 0.975),
-      L95 = quantile(value, prob = 0.025)
+      Rhat = posterior::rhat_basic(value)
     ) %>%
     dplyr::mutate(dplyr::across(dplyr::where(is.numeric), ~ pillar::num(., digits = 3)))
 }
