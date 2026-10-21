@@ -37,14 +37,34 @@ title: "心理学データ解析"
 - [体重推移のデータ](codes/SampleData/Weight.csv)
 - [M-1グランプリの評定データ](codes/SampleData/M1score2023.csv)
 
-## Rコード
+## 各章のコード
 
-- [二群の平均値差](codes/Dkiso1/20_example.R)
-- [Rによる分散分析のコード](codes/Dkiso1/Chapter22ANOVA.R)
-- [Rによる分散分析のコード（Rmdファイルバージョン）](codes/Dkiso1/Chapter22ANOVA.Rmd)
-- [分散分析課題用データセット1](codes/SampleData/chapter22exe1.csv)
-- [分散分析課題用データセット2](codes/SampleData/chapter22exe2.csv)
-- [分散分析課題用データセット3](codes/SampleData/chapter22exe3.csv)
+テキストでRを使う章ごとに，2種類のファイルを用意しています。
+
+- **完成版(.R)**：テキストに載っているコードをそのまま入れたものです。コメントの番号はテキストのコード番号(code 5.1 など)に対応しています。実行して結果を確かめたり，自分で書いたコードと見比べたりするのに使ってください。
+- **ワークシート(.qmd)**：自分で手を動かすためのファイルです。データの準備は書いてあるので，数値を打ち込む必要はありません。チャンクには【実行】(そのまま実行する)，【確認】(実行して結果を読み，問いに答える)，【自分で書く】(自分でコードを書く)の3種類があります。RStudioで開いて，最後にRenderボタンでエラーなくHTMLになることを確かめましょう。
+
+使い方は次のとおりです。
+
+1. ファイルを右クリックして「名前を付けてリンク先を保存」を選び，その授業のプロジェクトフォルダに保存します。
+2. サンプルデータを読み込む章では，上の「サンプルデータ」から `BaseballDecade.csv` をダウンロードし，同じプロジェクトフォルダに置きます。
+3. 分散分析の章(第20章・第22章)で使うANOVA君は，コードの中でインターネットから読み込みます(`source("https://bit.ly/3WL8VYR")`)。ファイルを手元に置きたい人は，作者の井関龍太先生の[ANOVA君のページ](https://riseki.cloudfree.jp/?ANOVA%E5%90%9B)から `anovakun_489.txt` を保存してください。
+
+| 章 | テーマ | 完成版 | ワークシート | 課題用データ |
+|----|--------|--------|--------------|--------------|
+| 03 | 統計環境Rの導入 | [.R](codes/Dkiso1/03_introR.R) | [.qmd](codes/Dkiso1/03_introR_worksheet.qmd) | |
+| 04 | 数値データの種類 | [.R](codes/Dkiso1/04_NumberData.R) | [.qmd](codes/Dkiso1/04_NumberData_worksheet.qmd) | |
+| 05 | 記述統計量 | [.R](codes/Dkiso1/05_descriptives.R) | [.qmd](codes/Dkiso1/05_descriptives_worksheet.qmd) | |
+| 06 | さまざまな相関係数とRによる実践 | [.R](codes/Dkiso1/06_Corr.R) | [.qmd](codes/Dkiso1/06_Corr_worksheet.qmd) | |
+| 09 | Rをつかった回帰分析 | [.R](codes/Dkiso1/09_regression.R) | [.qmd](codes/Dkiso1/09_regression_worksheet.qmd) | |
+| 10 | 確率と確率分布 | [.R](codes/Dkiso1/10_probability.R) | | |
+| 13 | 検定 | [.R](codes/Dkiso1/13_NHST.R) | | |
+| 16 | 二群の平均値差 | [.R](codes/Dkiso1/16_ttest.R) | [.qmd](codes/Dkiso1/16_ttest_worksheet.qmd) | |
+| 19 | F検定/分散分析の基礎 | [.R](codes/Dkiso1/19_Ftest.R) | [.qmd](codes/Dkiso1/19_Ftest_worksheet.qmd) | |
+| 20 | Rによる分散分析 | [.R](codes/Dkiso1/20_BetweenDesign.R) | [.qmd](codes/Dkiso1/20_BetweenDesign_worksheet.qmd) | [.R](codes/Dkiso1/20_kadai_data.R) |
+| 22 | RによるWithinデザインの分散分析 | [.R](codes/Dkiso1/22_WithinDesign.R) | [.qmd](codes/Dkiso1/22_WithinDesign_worksheet.qmd) | |
+| 24 | 尤度と線形モデル | [.R](codes/Dkiso1/24_linear_model.R) | [.qmd](codes/Dkiso1/24_linear_model_worksheet.qmd) | |
+| 29 | ベイズを実践する | [.R](codes/Dkiso1/29_BayesianModeling.R) | [.qmd](codes/Dkiso1/29_BayesianModeling_worksheet.qmd) | |
 
 ## 付録
 

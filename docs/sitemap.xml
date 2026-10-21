@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://stats.kosugitti.net/codes/Dkiso1/Chapter22ANOVA.html</loc>
-    <lastmod>2026-04-01T05:14:11.374Z</lastmod>
+    <loc>https://stats.kosugitti.net/WORKLOG.html</loc>
+    <lastmod>2026-08-07T00:30:15.843Z</lastmod>
   </url>
   <url>
-    <loc>https://stats.kosugitti.net/lectures.html</loc>
-    <lastmod>2026-04-01T05:15:45.069Z</lastmod>
+    <loc>https://stats.kosugitti.net/index.html</loc>
+    <lastmod>2026-10-21T07:58:07.896Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stats.kosugitti.net/basic.html</loc>
+    <lastmod>2026-10-21T07:36:00.849Z</lastmod>
   </url>
   <url>
     <loc>https://stats.kosugitti.net/about.html</loc>
     <lastmod>2026-04-01T05:15:55.237Z</lastmod>
   </url>
   <url>
-    <loc>https://stats.kosugitti.net/codes.html</loc>
-    <lastmod>2026-09-21T04:40:43.175Z</lastmod>
-  </url>
-  <url>
     <loc>https://stats.kosugitti.net/applied.html</loc>
     <lastmod>2026-10-12T03:52:01.567Z</lastmod>
   </url>
   <url>
-    <loc>https://stats.kosugitti.net/index.html</loc>
-    <lastmod>2026-10-21T07:08:52.029Z</lastmod>
+    <loc>https://stats.kosugitti.net/codes.html</loc>
+    <lastmod>2026-10-21T07:36:00.943Z</lastmod>
   </url>
   <url>
-    <loc>https://stats.kosugitti.net/WORKLOG.html</loc>
-    <lastmod>2026-08-07T00:30:15.843Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats.kosugitti.net/basic.html</loc>
-    <lastmod>2026-09-21T04:40:43.175Z</lastmod>
+    <loc>https://stats.kosugitti.net/lectures.html</loc>
+    <lastmod>2026-04-01T05:15:45.069Z</lastmod>
   </url>
 </urlset>

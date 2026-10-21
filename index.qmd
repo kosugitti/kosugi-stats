@@ -46,7 +46,7 @@ title: "心理統計教育教材"
 | 資料 | 最新バージョン |
 |------|--------------|
 | [基礎シラバス](pdfs/syllabus_basic.pdf) | 3.0.19 |
-| [基礎テキスト](pdfs/BasicBook3.pdf) | 3.29.9 |
+| [基礎テキスト](pdfs/BasicBook3.pdf) | 3.29.11 |
 | [応用シラバス2A](pdfs/syllabus2a.pdf) | 2.0.18 |
 | [応用シラバス2B](pdfs/syllabus2b.pdf) | 2.0.17 |
 | [応用テキスト1(前期)](pdfs/Dkiso2_book1.pdf) | 3.1.0 |

@@ -162,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#kindle-direct-publishing" id="toc-kindle-direct-publishing" class="nav-link" data-scroll-target="#kindle-direct-publishing">Kindle Direct Publishing</a></li>
   <li><a href="#インタラクティブ教材" id="toc-インタラクティブ教材" class="nav-link" data-scroll-target="#インタラクティブ教材">インタラクティブ教材</a></li>
   <li><a href="#サンプルデータ" id="toc-サンプルデータ" class="nav-link" data-scroll-target="#サンプルデータ">サンプルデータ</a></li>
-  <li><a href="#rコード" id="toc-rコード" class="nav-link" data-scroll-target="#rコード">Rコード</a></li>
+  <li><a href="#各章のコード" id="toc-各章のコード" class="nav-link" data-scroll-target="#各章のコード">各章のコード</a></li>
   <li><a href="#付録" id="toc-付録" class="nav-link" data-scroll-target="#付録">付録</a></li>
   </ul>
 </nav>
@@ -229,16 +229,123 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="codes/SampleData/M1score2023.csv">M-1グランプリの評定データ</a></li>
 </ul>
 </section>
-<section id="rコード" class="level2">
-<h2 class="anchored" data-anchor-id="rコード">Rコード</h2>
+<section id="各章のコード" class="level2">
+<h2 class="anchored" data-anchor-id="各章のコード">各章のコード</h2>
+<p>テキストでRを使う章ごとに，2種類のファイルを用意しています。</p>
 <ul>
-<li><a href="codes/Dkiso1/20_example.R">二群の平均値差</a></li>
-<li><a href="codes/Dkiso1/Chapter22ANOVA.R">Rによる分散分析のコード</a></li>
-<li><a href="./codes/Dkiso1/Chapter22ANOVA.html">Rによる分散分析のコード（Rmdファイルバージョン）</a></li>
-<li><a href="codes/SampleData/chapter22exe1.csv">分散分析課題用データセット1</a></li>
-<li><a href="codes/SampleData/chapter22exe2.csv">分散分析課題用データセット2</a></li>
-<li><a href="codes/SampleData/chapter22exe3.csv">分散分析課題用データセット3</a></li>
+<li><strong>完成版(.R)</strong>：テキストに載っているコードをそのまま入れたものです。コメントの番号はテキストのコード番号(code 5.1 など)に対応しています。実行して結果を確かめたり，自分で書いたコードと見比べたりするのに使ってください。</li>
+<li><strong>ワークシート(.qmd)</strong>：自分で手を動かすためのファイルです。データの準備は書いてあるので，数値を打ち込む必要はありません。チャンクには【実行】(そのまま実行する)，【確認】(実行して結果を読み，問いに答える)，【自分で書く】(自分でコードを書く)の3種類があります。RStudioで開いて，最後にRenderボタンでエラーなくHTMLになることを確かめましょう。</li>
 </ul>
+<p>使い方は次のとおりです。</p>
+<ol type="1">
+<li>ファイルを右クリックして「名前を付けてリンク先を保存」を選び，その授業のプロジェクトフォルダに保存します。</li>
+<li>サンプルデータを読み込む章では，上の「サンプルデータ」から <code>BaseballDecade.csv</code> をダウンロードし，同じプロジェクトフォルダに置きます。</li>
+<li>分散分析の章(第20章・第22章)で使うANOVA君は，コードの中でインターネットから読み込みます(<code>source("https://bit.ly/3WL8VYR")</code>)。ファイルを手元に置きたい人は，作者の井関龍太先生の<a href="https://riseki.cloudfree.jp/?ANOVA%E5%90%9B">ANOVA君のページ</a>から <code>anovakun_489.txt</code> を保存してください。</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>章</th>
+<th>テーマ</th>
+<th>完成版</th>
+<th>ワークシート</th>
+<th>課題用データ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>03</td>
+<td>統計環境Rの導入</td>
+<td><a href="codes/Dkiso1/03_introR.R">.R</a></td>
+<td><a href="codes/Dkiso1/03_introR_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td>数値データの種類</td>
+<td><a href="codes/Dkiso1/04_NumberData.R">.R</a></td>
+<td><a href="codes/Dkiso1/04_NumberData_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td>記述統計量</td>
+<td><a href="codes/Dkiso1/05_descriptives.R">.R</a></td>
+<td><a href="codes/Dkiso1/05_descriptives_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td>さまざまな相関係数とRによる実践</td>
+<td><a href="codes/Dkiso1/06_Corr.R">.R</a></td>
+<td><a href="codes/Dkiso1/06_Corr_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>09</td>
+<td>Rをつかった回帰分析</td>
+<td><a href="codes/Dkiso1/09_regression.R">.R</a></td>
+<td><a href="codes/Dkiso1/09_regression_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>確率と確率分布</td>
+<td><a href="codes/Dkiso1/10_probability.R">.R</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>検定</td>
+<td><a href="codes/Dkiso1/13_NHST.R">.R</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>二群の平均値差</td>
+<td><a href="codes/Dkiso1/16_ttest.R">.R</a></td>
+<td><a href="codes/Dkiso1/16_ttest_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>F検定/分散分析の基礎</td>
+<td><a href="codes/Dkiso1/19_Ftest.R">.R</a></td>
+<td><a href="codes/Dkiso1/19_Ftest_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>Rによる分散分析</td>
+<td><a href="codes/Dkiso1/20_BetweenDesign.R">.R</a></td>
+<td><a href="codes/Dkiso1/20_BetweenDesign_worksheet.qmd">.qmd</a></td>
+<td><a href="codes/Dkiso1/20_kadai_data.R">.R</a></td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>RによるWithinデザインの分散分析</td>
+<td><a href="codes/Dkiso1/22_WithinDesign.R">.R</a></td>
+<td><a href="codes/Dkiso1/22_WithinDesign_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>尤度と線形モデル</td>
+<td><a href="codes/Dkiso1/24_linear_model.R">.R</a></td>
+<td><a href="codes/Dkiso1/24_linear_model_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>29</td>
+<td>ベイズを実践する</td>
+<td><a href="codes/Dkiso1/29_BayesianModeling.R">.R</a></td>
+<td><a href="codes/Dkiso1/29_BayesianModeling_worksheet.qmd">.qmd</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="付録" class="level2">
 <h2 class="anchored" data-anchor-id="付録">付録</h2>

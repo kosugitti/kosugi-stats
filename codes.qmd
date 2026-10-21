@@ -13,15 +13,11 @@ title: "コードとデータ"
 | [IRTsample.csv](codes/SampleData/IRTsample.csv) | 項目反応理論用のデータ |
 | [Weight.csv](codes/SampleData/Weight.csv) | 体重推移のデータ |
 | [M1score2023.csv](codes/SampleData/M1score2023.csv) | M-1グランプリの評定データ |
-| [chapter22exe1.csv](codes/SampleData/chapter22exe1.csv) | 分散分析課題用データセット1 |
-| [chapter22exe2.csv](codes/SampleData/chapter22exe2.csv) | 分散分析課題用データセット2 |
-| [chapter22exe3.csv](codes/SampleData/chapter22exe3.csv) | 分散分析課題用データセット3 |
 
 ## データ解析 Rコード
 
-- [二群の平均値差](codes/Dkiso1/20_example.R)
-- [Rによる分散分析のコード](codes/Dkiso1/Chapter22ANOVA.R)
-- [Rによる分散分析のコード（Rmd版）](codes/Dkiso1/Chapter22ANOVA.Rmd)
+テキストの章ごとに，完成版(.R)とワークシート(.qmd)を用意しています。
+詳細は[心理学データ解析](basic.qmd#各章のコード)ページを参照してください。
 
 ## データ解析応用 Rコード
 

@@ -2,6 +2,11 @@ project:
   type: website
   output-dir: docs
   pre-render: python3 tools/update_versions.py
+  # codes/ の .qmd は学生配布用のワークシートなのでサイトのページにはしない(resources で原本のまま配る)
+  render:
+    - "*.qmd"
+    - "WORKLOG.md"
+    - "!codes/"
   resources:
     - "pdfs/**"
     - "archive/**"

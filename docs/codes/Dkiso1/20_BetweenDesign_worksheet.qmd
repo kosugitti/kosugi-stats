@@ -1,0 +1,183 @@
+---
+title: "第20章 Rによる分散分析 ワークシート"
+author: "学籍番号 氏名"
+format:
+  html:
+    embed-resources: true
+execute:
+  echo: true
+  error: true
+---
+
+## このワークシートの使い方
+
+- ANOVA君のソース `anovakun_489.txt` をサイトからダウンロードし，このファイルと同じプロジェクトフォルダに置いてください。
+- 灰色の枠(チャンク)には3種類あります。
+  - **【実行】** コードは書いてあります。そのまま実行してください。
+  - **【確認】** コードは書いてあります。実行して，出てきた結果を読んで問いに答えてください。答えはチャンクの下の「答え:」の後に書きます。
+  - **【自分で書く】** `# ここに書く` の行を消して，自分でコードを書いてください。
+- 全部書けたら，右上の Render ボタンを押してエラーなくHTMLができることを確かめましょう。
+- テキストどおりの完成版は `20_BetweenDesign.R` です。詰まったときに見比べてください。
+
+## 1. 準備
+
+【実行】パッケージとANOVA君を読み込みます(テキストのコード20.1)。ファイルをダウンロードしていない人は，2行目の `#` を外して，ネットから直接読み込んでください(コード20.2)。
+
+```{r}
+rm(list = ls())
+library(tidyverse)
+source("anovakun_489.txt")
+# source("https://bit.ly/3WL8VYR")
+```
+
+## 2. 分散分析のデータ形式
+
+【実行】3群×2刺激の混合計画のデータを用意します(コード20.3)。
+
+```{r}
+MixedDesign <- data.frame(
+  id = 1:12,
+  condition = rep(1:3, each = 4),
+  stimuli1 = c(6, 6, 5, 5, 7, 4, 7, 6, 4, 3, 4, 6),
+  stimuli2 = c(8, 3, 2, 5, 9, 7, 1, 6, 4, 9, 2, 3)
+)
+MixedDesign$condition <- factor(MixedDesign$condition,
+  labels = c("control", "exp1", "exp2")
+)
+print(MixedDesign)
+```
+
+【確認】ワイド型からロング型に変換します(コード20.4)。
+
+```{r}
+MixedDesign_long <- MixedDesign %>%
+  pivot_longer(
+    cols = c(stimuli1, stimuli2),
+    names_to = "stimuli",
+    values_to = "value"
+  )
+print(MixedDesign_long)
+```
+
+問1. ワイド型の `MixedDesign` とロング型の `MixedDesign_long` は，それぞれ何行何列ですか。ロング型では1行が何を表していますか。
+
+答え:
+
+## 3. 二要因Between計画の分散分析
+
+【実行】温度(Hot/Cold)×メーカー(A/B)の2要因Between計画のデータを用意します(コード20.5)。
+
+```{r}
+Between2 <- data.frame(
+  temp = rep(1:2, each = 6),
+  maker = rep(rep(1:2, each = 3), 2),
+  value = c(13, 11, 12, 7, 6, 8, 9, 9, 9, 13, 11, 9)
+)
+Between2$temp <- factor(Between2$temp, labels = c("Hot", "Cold"))
+Between2$maker <- factor(Between2$maker, labels = c("A", "B"))
+```
+
+【自分で書く】`anovakun()` で二要因分散分析を実行してください。効果量も出すようにします(コード20.6)。
+
+ヒント: `anovakun(データ, "計画の型", 要因Aの水準数, 要因Bの水準数, eps = TRUE)` の形です。2つとも群間(Between)要因のときの計画の型は何でしょうか。
+
+```{r}
+# ここに書く
+```
+
+問2. ANOVA TABLE を見て答えてください。
+
+- 温度(A)の主効果は有意ですか。
+- メーカー(B)の主効果は有意ですか。
+- 交互作用(A x B)は有意ですか。
+- 効果量 $\varepsilon^2$ が最も大きいのはどれですか。
+
+答え:
+
+問3. POST ANALYSES の単純効果の検定を見て，「B at a1」と「B at a2」の結果をそれぞれ言葉で説明してください。
+
+答え:
+
+## 4. 線形モデルとして分析
+
+【確認】同じデータを線形モデルで分析します(コード20.7)。
+
+```{r}
+result.lm <- lm(value ~ temp * maker, data = Between2)
+summary(result.lm)
+```
+
+問4. `(Intercept)` の推定値12.0は，どの条件の平均値と同じですか。問2のANOVA君の DESCRIPTIVE STATISTICS と見比べて答えてください。
+
+答え:
+
+【自分で書く】`result.lm` を分散分析表として表示してください(コード20.8)。
+
+```{r}
+# ここに書く
+```
+
+問5. 表示された $F$ 値をANOVA君の ANOVA TABLE と見比べてください。同じになっていますか。
+
+答え:
+
+## 5. 分析結果の可視化
+
+【確認】平均値と標準誤差の棒グラフを描きます(コード20.9)。
+
+```{r}
+Between2 %>%
+  group_by(temp, maker) %>%
+  summarise(
+    mean = mean(value),
+    sd = sd(value),
+    n = n(),
+    se = sd / sqrt(n),
+    .groups = "drop"
+  ) %>%
+  ggplot(aes(x = temp, y = mean, fill = maker)) +
+  geom_bar(
+    stat = "identity",
+    position = position_dodge(0.9),
+    width = 0.8
+  ) +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se),
+    position = position_dodge(0.9), width = 0.25
+  ) +
+  labs(
+    title = "温度とメーカーによる評価値の比較",
+    x = "温度条件",
+    y = "評価値の平均",
+    fill = "メーカー"
+  ) +
+  theme_bw()
+```
+
+【確認】箱ひげ図に個々のデータを重ねて描きます(コード20.10)。
+
+```{r}
+Between2 %>%
+  ggplot(aes(x = temp, y = value, fill = maker)) +
+  geom_boxplot(alpha = 0.5, outlier.shape = NA) +
+  geom_jitter(aes(color = maker), position = position_jitterdodge(jitter.width = 0.2), size = 2) +
+  labs(
+    title = "温度とメーカーによる評価値の分布",
+    x = "温度条件",
+    y = "評価値",
+    fill = "メーカー",
+    color = "メーカー"
+  ) +
+  theme_bw()
+```
+
+【自分で書く】コード20.9を参考に，交互作用が見やすい折れ線グラフを描いてください(コード20.11)。
+
+ヒント: 集計の部分(`group_by()` から `summarise()` まで)は20.9と同じです。`ggplot()` の中を `aes(x = temp, y = mean, group = maker, color = maker)` にして，`geom_bar()` の代わりに `geom_line()` と `geom_point()` を使います。
+
+```{r}
+# ここに書く
+```
+
+問6. 折れ線グラフで，交互作用があることはどこから読み取れますか。
+
+答え:
