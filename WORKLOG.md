@@ -1,5 +1,14 @@
 # WORKLOG
 
+## 2026-10-21〜22 基礎ページに「各章のコード」を新設
+
+- `basic.qmd` に「各章のコード」の節を作った。表の列は「章 | テーマ | 完成版(.R) | ワークシート(.qmd) | 課題用データ」で，対象は ch03〜29 のうちRを使う13章。課題用データは ch16・19・20 の `NN_kadai_data.R`。置き場所は `codes/Dkiso1/`。ANOVA君はサイトに置かず，`source("https://bit.ly/3WL8VYR")` で読み込む。
+- 旧版のコードとデータ(`20_example.R`・`Chapter22ANOVA.R/.Rmd`・`SampleData/chapter22exe1〜3.csv`)は，旧版PDFとKDPペーパーバックが参照しているので，「旧版のコードとデータ」の節に残した。
+- `_quarto.yml` の render を `"*.qmd"`・`"WORKLOG.md"`・`"!codes/"` にした。ワークシートの .qmd をページにせず，codes/** を resources として原本のまま配るため。WORKLOG.md を外すと docs/WORKLOG.html が消える。
+- `codes.qmd` は基礎ページへの案内だけにした。
+- テキストは基礎3.29.16まで更新して反映した。経緯は `psychometrics_syllabus/WORKLOG.md` の 2026-10-21(続き1〜8)。
+- 次: ch19・ch20 の演習回を作るときは，採点器の `assignments/b2_ch19/data/`・`b2_ch20/data/` に課題データを置く。テキストのコードを直したら，`codes/Dkiso1/` の該当ファイルも合わせて直す。
+
 ## 2026-08-01
 
 ### stats.kosugitti.net のHTTPS証明書エラーを解消

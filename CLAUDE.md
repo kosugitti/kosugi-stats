@@ -10,6 +10,7 @@
 ## 状態
 - 公開済み、稼働中
 - stats.kosugitti.net はHTTPS対応済み（Let's Encrypt証明書発行・`https_enforced=true`）
+- 基礎ページの「各章のコード」(`codes/Dkiso1/`)はテキストのコードと一致させる。テキストのコードを直したら，ここのファイルも直す。`codes/` の .qmd は render 対象外(`_quarto.yml`)
 
 ### GitHub Pagesの証明書が効かなくなったら
 「安全なサイトではない」警告が出る場合，`gh api repos/kosugitti/kosugi-stats/pages` で
@@ -29,7 +30,7 @@ kosugi-stats/
 ├── archive/           # 旧版PDF（2ファイル）
 ├── codes/             # Rコード・サンプルデータ
 │   ├── SampleData/    # CSV 11ファイル
-│   ├── Dkiso1/        # 基礎用Rコード
+│   ├── Dkiso1/        # 基礎用Rコード(章ごとの完成版.R・ワークシート.qmd・課題データ。旧版ファイルも同居)
 │   └── Dkiso2/        # 応用用Rコード 28ファイル
 └── docs/              # Quarto出力
 ```
