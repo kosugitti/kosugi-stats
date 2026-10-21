@@ -59,8 +59,8 @@ title: "心理学データ解析"
 | 09 | Rをつかった回帰分析 | [.R](codes/Dkiso1/09_regression.R) | [.qmd](codes/Dkiso1/09_regression_worksheet.qmd) | |
 | 10 | 確率と確率分布 | [.R](codes/Dkiso1/10_probability.R) | | |
 | 13 | 検定 | [.R](codes/Dkiso1/13_NHST.R) | | |
-| 16 | 二群の平均値差 | [.R](codes/Dkiso1/16_ttest.R) | [.qmd](codes/Dkiso1/16_ttest_worksheet.qmd) | |
-| 19 | F検定/分散分析の基礎 | [.R](codes/Dkiso1/19_Ftest.R) | [.qmd](codes/Dkiso1/19_Ftest_worksheet.qmd) | |
+| 16 | 二群の平均値差 | [.R](codes/Dkiso1/16_ttest.R) | [.qmd](codes/Dkiso1/16_ttest_worksheet.qmd) | [.R](codes/Dkiso1/16_kadai_data.R) |
+| 19 | F検定/分散分析の基礎 | [.R](codes/Dkiso1/19_Ftest.R) | [.qmd](codes/Dkiso1/19_Ftest_worksheet.qmd) | [.R](codes/Dkiso1/19_kadai_data.R) |
 | 20 | Rによる分散分析 | [.R](codes/Dkiso1/20_BetweenDesign.R) | [.qmd](codes/Dkiso1/20_BetweenDesign_worksheet.qmd) | [.R](codes/Dkiso1/20_kadai_data.R) |
 | 22 | RによるWithinデザインの分散分析 | [.R](codes/Dkiso1/22_WithinDesign.R) | [.qmd](codes/Dkiso1/22_WithinDesign_worksheet.qmd) | |
 | 24 | 尤度と線形モデル | [.R](codes/Dkiso1/24_linear_model.R) | [.qmd](codes/Dkiso1/24_linear_model_worksheet.qmd) | |
@@ -69,3 +69,14 @@ title: "心理学データ解析"
 ## 付録
 
 - [電子計算機えとせとら](pdfs/common_contents.pdf) --- パソコンのファイル概念、キーボード配列など、テキストの付録に含まれる内容のまとめ
+
+## 旧版のコードとデータ
+
+[旧版の授業資料](archive/Dkiso1_book.pdf)(2024年度までのバージョン)とペーパーバック版で使うコードとデータです。現行のテキスト(Ver3)を使う人は，上の「各章のコード」を使ってください。
+
+- [二群の平均値差(旧版)](codes/Dkiso1/20_example.R)
+- [Rによる分散分析のコード(旧版)](codes/Dkiso1/Chapter22ANOVA.R)
+- [Rによる分散分析のコード Rmd版(旧版)](codes/Dkiso1/Chapter22ANOVA.Rmd)
+- [分散分析課題用データセット1(旧版)](codes/SampleData/chapter22exe1.csv)
+- [分散分析課題用データセット2(旧版)](codes/SampleData/chapter22exe2.csv)
+- [分散分析課題用データセット3(旧版)](codes/SampleData/chapter22exe3.csv)
