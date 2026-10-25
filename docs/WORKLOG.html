@@ -194,6 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#worklog" id="toc-worklog" class="nav-link active" data-scroll-target="#worklog">WORKLOG</a>
   <ul class="collapse">
+  <li><a href="#基礎ページに各章のコードを新設" id="toc-基礎ページに各章のコードを新設" class="nav-link" data-scroll-target="#基礎ページに各章のコードを新設">2026-10-21〜22 基礎ページに「各章のコード」を新設</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">2026-08-01</a>
   <ul class="collapse">
   <li><a href="#stats.kosugitti.net-のhttps証明書エラーを解消" id="toc-stats.kosugitti.net-のhttps証明書エラーを解消" class="nav-link" data-scroll-target="#stats.kosugitti.net-のhttps証明書エラーを解消">stats.kosugitti.net のHTTPS証明書エラーを解消</a></li>
@@ -214,6 +215,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="worklog" class="level1">
 <h1>WORKLOG</h1>
+<section id="基礎ページに各章のコードを新設" class="level2">
+<h2 class="anchored" data-anchor-id="基礎ページに各章のコードを新設">2026-10-21〜22 基礎ページに「各章のコード」を新設</h2>
+<ul>
+<li><code>basic.qmd</code> に「各章のコード」の節を作った。表の列は「章 | テーマ | 完成版(.R) | ワークシート(.qmd) | 課題用データ」で，対象は ch03〜29 のうちRを使う13章。課題用データは ch16・19・20 の <code>NN_kadai_data.R</code>。置き場所は <code>codes/Dkiso1/</code>。ANOVA君はサイトに置かず，<code>source("https://bit.ly/3WL8VYR")</code> で読み込む。</li>
+<li>旧版のコードとデータ(<code>20_example.R</code>・<code>Chapter22ANOVA.R/.Rmd</code>・<code>SampleData/chapter22exe1〜3.csv</code>)は，旧版PDFとKDPペーパーバックが参照しているので，「旧版のコードとデータ」の節に残した。</li>
+<li><code>_quarto.yml</code> の render を <code>"*.qmd"</code>・<code>"WORKLOG.md"</code>・<code>"!codes/"</code> にした。ワークシートの .qmd をページにせず，codes/** を resources として原本のまま配るため。WORKLOG.md を外すと docs/WORKLOG.html が消える。</li>
+<li><code>codes.qmd</code> は基礎ページへの案内だけにした。</li>
+<li>テキストは基礎3.29.16まで更新して反映した。経緯は <code>psychometrics_syllabus/WORKLOG.md</code> の 2026-10-21(続き1〜8)。</li>
+<li>次: ch19・ch20 の演習回を作るときは，採点器の <code>assignments/b2_ch19/data/</code>・<code>b2_ch20/data/</code> に課題データを置く。テキストのコードを直したら，<code>codes/Dkiso1/</code> の該当ファイルも合わせて直す。</li>
+</ul>
+</section>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section">2026-08-01</h2>
 <section id="stats.kosugitti.net-のhttps証明書エラーを解消" class="level3">

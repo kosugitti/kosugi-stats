@@ -50,7 +50,7 @@ mu <- gm + effect
 
 X <- rnorm(N * Lv, mu, sig)
 dat <- data.frame(
-  Idx = rep(1:Lv, N * Lv),
+  Idx = rep(1:Lv, times = N),
   value = X
 )
 
