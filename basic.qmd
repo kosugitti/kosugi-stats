@@ -61,7 +61,7 @@ title: "心理学データ解析"
 | 13 | 検定 | [.R](codes/Dkiso1/13_NHST.R) | | |
 | 16 | 二群の平均値差 | [.R](codes/Dkiso1/16_ttest.R) | [.qmd](codes/Dkiso1/16_ttest_worksheet.qmd) | [.R](codes/Dkiso1/16_kadai_data.R) |
 | 19 | F検定/分散分析の基礎 | [.R](codes/Dkiso1/19_Ftest.R) | [.qmd](codes/Dkiso1/19_Ftest_worksheet.qmd) | [.R](codes/Dkiso1/19_kadai_data.R) |
-| 20 | Rによる分散分析 | [.R](codes/Dkiso1/20_BetweenDesign.R) | [.qmd](codes/Dkiso1/20_BetweenDesign_worksheet.qmd) | [.R](codes/Dkiso1/20_kadai_data.R) |
+| 20 | Rによる分散分析 | [.R](codes/Dkiso1/20_BetweenDesign.R) | [.qmd](codes/Dkiso1/20_BetweenDesign_worksheet.qmd) | [.R](codes/Dkiso1/20_kadai.R) |
 | 22 | RによるWithinデザインの分散分析 | [.R](codes/Dkiso1/22_WithinDesign.R) | [.qmd](codes/Dkiso1/22_WithinDesign_worksheet.qmd) | |
 | 24 | 尤度と線形モデル | [.R](codes/Dkiso1/24_linear_model.R) | [.qmd](codes/Dkiso1/24_linear_model_worksheet.qmd) | |
 | 29 | ベイズを実践する | [.R](codes/Dkiso1/29_BayesianModeling.R) | [.qmd](codes/Dkiso1/29_BayesianModeling_worksheet.qmd) | |

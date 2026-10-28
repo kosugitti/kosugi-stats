@@ -21,7 +21,7 @@ execute:
 
 ## 1. 準備
 
-【実行】パッケージとANOVA君を読み込みます(テキストのコード20.1)。ファイルをダウンロードしていない人は，2行目の `#` を外して，ネットから直接読み込んでください(コード20.2)。
+【実行】パッケージとANOVA君を読み込みます(テキストのコード20.1)。ファイルをダウンロードしていない人は，4行目の `#` を外して，ネットから直接読み込んでください(コード20.2)。
 
 ```{r}
 rm(list = ls())
@@ -30,9 +30,40 @@ source("anovakun_489.txt")
 # source("https://bit.ly/3WL8VYR")
 ```
 
-## 2. 分散分析のデータ形式
+## 2. 一要因3水準の分散分析
 
-【実行】3群×2刺激の混合計画のデータを用意します(コード20.3)。
+【実行】前回(第19章)と同じ，3群×4名のデータを用意します(コード20.3の前半)。
+
+```{r}
+Example1 <- data.frame(
+  id = 1:12,
+  condition = rep(1:3, each = 4),
+  value = c(6, 6, 5, 5, 7, 4, 7, 6, 4, 3, 4, 6)
+)
+Example1$condition <- factor(Example1$condition,
+  labels = c("control", "exp1", "exp2")
+)
+```
+
+【自分で書く】`anovakun()` で一要因の分散分析を実行してください。効果量も出すようにします(コード20.3の後半)。
+
+ヒント: `anovakun(データ, "計画の型", 水準数, eps = TRUE)` の形です。`id` の列は渡さないので，データは `Example1[, -1]` とします。一要因で群間(Between)要因のときの計画の型は何でしょうか(テキストの表20.1)。
+
+```{r}
+# ここに書く
+```
+
+問1. ANOVA TABLE を見て答えてください。$F$ 値，自由度，$p$ 値はいくつですか。条件の主効果は有意ですか。
+
+答え:
+
+問2. この出力には POST ANALYSES(多重比較)が出てきません。なぜでしょうか。
+
+答え:
+
+## 3. 分散分析のデータ形式
+
+【実行】3群×2刺激の混合計画のデータを用意します(コード20.4)。
 
 ```{r}
 MixedDesign <- data.frame(
@@ -47,7 +78,7 @@ MixedDesign$condition <- factor(MixedDesign$condition,
 print(MixedDesign)
 ```
 
-【確認】ワイド型からロング型に変換します(コード20.4)。
+【確認】ワイド型からロング型に変換します(コード20.5)。
 
 ```{r}
 MixedDesign_long <- MixedDesign %>%
@@ -59,13 +90,13 @@ MixedDesign_long <- MixedDesign %>%
 print(MixedDesign_long)
 ```
 
-問1. ワイド型の `MixedDesign` とロング型の `MixedDesign_long` は，それぞれ何行何列ですか。ロング型では1行が何を表していますか。
+問3. ワイド型の `MixedDesign` とロング型の `MixedDesign_long` は，それぞれ何行何列ですか。ロング型では1行が何を表していますか。
 
 答え:
 
-## 3. 二要因Between計画の分散分析
+## 4. 二要因Between計画(2×2)の分散分析
 
-【実行】温度(Hot/Cold)×メーカー(A/B)の2要因Between計画のデータを用意します(コード20.5)。
+【実行】温度(Hot/Cold)×メーカー(A/B)の2要因Between計画のデータを用意します(コード20.6)。
 
 ```{r}
 Between2 <- data.frame(
@@ -77,7 +108,7 @@ Between2$temp <- factor(Between2$temp, labels = c("Hot", "Cold"))
 Between2$maker <- factor(Between2$maker, labels = c("A", "B"))
 ```
 
-【自分で書く】`anovakun()` で二要因分散分析を実行してください。効果量も出すようにします(コード20.6)。
+【自分で書く】`anovakun()` で二要因分散分析を実行してください。効果量も出すようにします(コード20.7)。
 
 ヒント: `anovakun(データ, "計画の型", 要因Aの水準数, 要因Bの水準数, eps = TRUE)` の形です。2つとも群間(Between)要因のときの計画の型は何でしょうか。
 
@@ -85,7 +116,7 @@ Between2$maker <- factor(Between2$maker, labels = c("A", "B"))
 # ここに書く
 ```
 
-問2. ANOVA TABLE を見て答えてください。
+問4. ANOVA TABLE を見て答えてください。
 
 - 温度(A)の主効果は有意ですか。
 - メーカー(B)の主効果は有意ですか。
@@ -94,40 +125,56 @@ Between2$maker <- factor(Between2$maker, labels = c("A", "B"))
 
 答え:
 
-問3. POST ANALYSES の単純効果の検定を見て，「B at a1」と「B at a2」の結果をそれぞれ言葉で説明してください。
+問5. POST ANALYSES の単純効果の検定を見て，「B at a1」と「B at a2」の結果をそれぞれ言葉で説明してください。
 
 答え:
 
-## 4. 線形モデルとして分析
+## 5. 二要因Between計画(2×3)と下位検定
 
-【確認】同じデータを線形モデルで分析します(コード20.7)。
+【確認】要因Bが3水準のデータで分散分析を実行します(コード20.8)。出力が長いので，上から順に読んでいきましょう。
 
 ```{r}
-result.lm <- lm(value ~ temp * maker, data = Between2)
-summary(result.lm)
+Between23 <- data.frame(
+  A = rep(1:2, each = 15),
+  B = rep(rep(1:3, each = 5), 2),
+  value = c(
+    46, 44, 32, 40, 49, # a1・b1
+    57, 54, 44, 56, 53, # a1・b2
+    40, 24, 39, 25, 33, # a1・b3
+    50, 34, 42, 30, 43, # a2・b1
+    55, 44, 52, 63, 59, # a2・b2
+    58, 55, 53, 61, 59 # a2・b3
+  )
+)
+Between23$A <- factor(Between23$A, labels = c("a1", "a2"))
+Between23$B <- factor(Between23$B, labels = c("b1", "b2", "b3"))
+
+anovakun(Between23, "ABs", 2, 3, eps = TRUE)
 ```
 
-問4. `(Intercept)` の推定値12.0は，どの条件の平均値と同じですか。問2のANOVA君の DESCRIPTIVE STATISTICS と見比べて答えてください。
+問6. 要因Aは主効果が有意なのに，多重比較(MULTIPLE COMPARISON for "A")が出てきません。なぜでしょうか。
 
 答え:
 
-【自分で書く】`result.lm` を分散分析表として表示してください(コード20.8)。
-
-```{r}
-# ここに書く
-```
-
-問5. 表示された $F$ 値をANOVA君の ANOVA TABLE と見比べてください。同じになっていますか。
+問7. MULTIPLE COMPARISON for "B" を見て，b1・b2・b3 のどの組の間に有意な差がありますか。
 
 答え:
 
-## 5. 分析結果の可視化
+問8. SIMPLE EFFECTS を見て，「A at b1」「A at b2」「A at b3」のうち有意なのはどれですか。それはどういう意味ですか。
+
+答え:
+
+問9. MULTIPLE COMPARISON for "B at a1" と "B at a2" を見て，a1 と a2 のそれぞれで b1・b2・b3 の大小関係をまとめてください。
+
+答え:
+
+## 6. 分析結果の可視化
 
 【確認】平均値と標準誤差の棒グラフを描きます(コード20.9)。
 
 ```{r}
-Between2 %>%
-  group_by(temp, maker) %>%
+Between23 %>%
+  group_by(A, B) %>%
   summarise(
     mean = mean(value),
     sd = sd(value),
@@ -135,7 +182,7 @@ Between2 %>%
     se = sd / sqrt(n),
     .groups = "drop"
   ) %>%
-  ggplot(aes(x = temp, y = mean, fill = maker)) +
+  ggplot(aes(x = B, y = mean, fill = A)) +
   geom_bar(
     stat = "identity",
     position = position_dodge(0.9),
@@ -145,10 +192,10 @@ Between2 %>%
     position = position_dodge(0.9), width = 0.25
   ) +
   labs(
-    title = "温度とメーカーによる評価値の比較",
-    x = "温度条件",
-    y = "評価値の平均",
-    fill = "メーカー"
+    title = "要因Aと要因Bによる平均値の比較",
+    x = "要因B",
+    y = "平均値",
+    fill = "要因A"
   ) +
   theme_bw()
 ```
@@ -156,28 +203,35 @@ Between2 %>%
 【確認】箱ひげ図に個々のデータを重ねて描きます(コード20.10)。
 
 ```{r}
-Between2 %>%
-  ggplot(aes(x = temp, y = value, fill = maker)) +
+Between23 %>%
+  ggplot(aes(x = B, y = value, fill = A)) +
   geom_boxplot(alpha = 0.5, outlier.shape = NA) +
-  geom_jitter(aes(color = maker), position = position_jitterdodge(jitter.width = 0.2), size = 2) +
+  geom_jitter(aes(color = A),
+    position = position_jitterdodge(jitter.width = 0.2),
+    size = 2
+  ) +
   labs(
-    title = "温度とメーカーによる評価値の分布",
-    x = "温度条件",
-    y = "評価値",
-    fill = "メーカー",
-    color = "メーカー"
+    title = "要因Aと要因Bによる測定値の分布",
+    x = "要因B",
+    y = "測定値",
+    fill = "要因A",
+    color = "要因A"
   ) +
   theme_bw()
 ```
 
+問10. 棒グラフのコードの `geom_errorbar()` と `position_dodge(0.9)`，箱ひげ図のコードの `geom_jitter()` は，それぞれ何をしていますか。テキストのコード解説と見比べて答えてください。
+
+答え:
+
 【自分で書く】コード20.9を参考に，交互作用が見やすい折れ線グラフを描いてください(コード20.11)。
 
-ヒント: 集計の部分(`group_by()` から `summarise()` まで)は20.9と同じです。`ggplot()` の中を `aes(x = temp, y = mean, group = maker, color = maker)` にして，`geom_bar()` の代わりに `geom_line()` と `geom_point()` を使います。
+ヒント: 集計の部分(`group_by()` から `summarise()` まで)は20.9と同じです。`ggplot()` の中を `aes(x = B, y = mean, group = A, color = A)` にして，`geom_bar()` の代わりに `geom_line()` と `geom_point()` を使います。
 
 ```{r}
 # ここに書く
 ```
 
-問6. 折れ線グラフで，交互作用があることはどこから読み取れますか。
+問11. 折れ線グラフを見て，交互作用があることはどこから読み取れますか。問8の単純効果の結果とも見比べてください。
 
 答え:
