@@ -60,3 +60,8 @@ gh api -X PUT repos/kosugitti/kosugi-stats/pages -F https_enforced=true
 ホーム索引(~/Dropbox/CLAUDE.md)のステータスセル圧縮時の退避(退避時点の全文):
 
 サイト再構成・稼働中。ベイズ章群(b25-b29)シラバス再編完了。ch07/ch08の回帰例を勉強時間・単語数→テスト点に全面改訂(GPA>4の誤り解消，図はggplot2/ragg/scatterplot3d/TikZ化，図8.5-8.8の矢印・配置も調整)。v3.29.3でビルド→kosugi-statsへ反映済。KDP公開版は旧m系のままで修正は全てV3(ch系)側，V3ベースで出し直す方針(夏休みの宿題)。残作業: ch29本文新規執筆(4節・現状白紙で最優先ブロッカー)，ch27本文圧縮(18.5k→10k字)＋章タイトルのシラバス同期，ch28 JASPバージョン更新，KDP用体裁ラッパ(BasicBook3_kdp.tex)移植，m系SEM章新規執筆。夏休みに集中執筆，普段は空き時間に1節ずつ。詳細→Git/kosugi-stats/WORKLOG.md，Git/psychometrics_syllabus/WORKLOG.md
+
+## 2026-10-28 第20章のコードを新版に
+- `codes/Dkiso1/20_BetweenDesign.R`をテキスト3.29.18のコード20.1〜20.11に合わせて書き直し。`20_BetweenDesign_worksheet.qmd`も新版に(一要因・2×2・2×3の下位検定・可視化。問1〜11)
+- 課題コード`20_kadai.R`を新規(データ・図は全部書いてあり，学生はanovakunの1行を2か所書く)。basic.qmdの課題データ列を`20_kadai_data.R`→`20_kadai.R`に(旧ファイルは残置)
+- 基礎PDFを3.29.18に差し替えてrender・push(87ed3a5)
