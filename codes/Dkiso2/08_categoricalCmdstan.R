@@ -45,7 +45,8 @@ pe <- ((a + b) * (a + c) + (b + d) * (c + d)) / n / n
 ### モデルによる推定
 model <- cmdstanr::cmdstan_model("kappa.stan")
 model$check_syntax()
-dataSet <- list(Y = c(55, 16, 14, 35))
+## Stan の Pi の並び(両方Yes, AがNoでBがYes, AがYesでBがNo, 両方No)＝表を行ごとに読んだ a, c, b, d の順で渡す
+dataSet <- list(Y = c(a, c, b, d))
 fit <- model$sample(
   data = dataSet,
   chains = 4,
