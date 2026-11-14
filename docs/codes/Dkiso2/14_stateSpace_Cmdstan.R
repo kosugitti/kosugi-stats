@@ -71,7 +71,7 @@ Est1 <- fit1.df %>%
 g <- dat1 %>%
   tibble::rowid_to_column("ID") %>%
   dplyr::left_join(Est1, by = "ID") %>%
-  ggplot(aes(x = ID, y = weight, ymin = U95, ymax = L95)) +
+  ggplot(aes(x = ID, y = weight, ymin = L95, ymax = U95)) +
   geom_point() +
   geom_point(aes(x = ID, y = MAP), color = palette()[2]) +
   geom_ribbon(fill = palette()[3], alpha = 0.2)
