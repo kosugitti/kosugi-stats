@@ -65,3 +65,6 @@ gh api -X PUT repos/kosugitti/kosugi-stats/pages -F https_enforced=true
 - `codes/Dkiso1/20_BetweenDesign.R`をテキスト3.29.18のコード20.1〜20.11に合わせて書き直し。`20_BetweenDesign_worksheet.qmd`も新版に(一要因・2×2・2×3の下位検定・可視化。問1〜11)
 - 課題コード`20_kadai.R`を新規(データ・図は全部書いてあり，学生はanovakunの1行を2か所書く)。basic.qmdの課題データ列を`20_kadai_data.R`→`20_kadai.R`に(旧ファイルは残置)
 - 基礎PDFを3.29.18に差し替えてrender・push(87ed3a5)
+
+## 2026-11-20
+- `qa-interaction.qmd` を追加(ナビには載せず URL を LINE で配る用)＝LINE「専大心理統計」の質問「独立変数どうしに相関はあるが交互作用はない，をどう解釈するか」への解説。例1(r=.30・交互作用なし＝平行線)と例2(r=0・交互作用あり＝傾きが違う)をシミュレーションで示し，2×2 の表と卒論の書き方の例。set.seed(20261185)＝例1の交互作用が 0.13(p=.76)・例2 が 4.40 になる種を探して選んだ(最初の種では例1が偶然 p=.005 になった)
